@@ -1,2 +1,2 @@
-# oebs-mainmanager-api
-MainManager api mot Oebs
+# MainManager - Oebs Api
+REST API'er tilbudt av Oebs.
