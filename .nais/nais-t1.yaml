@@ -34,7 +34,7 @@ spec:
   accessPolicy:
     inbound:
       rules:
-         - application: oebs-api-ve-t1
+         - application: oebs-mainmanager-api-t1
            namespace: team-oebs
            cluster: dev-fss
 
