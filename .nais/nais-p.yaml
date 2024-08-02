@@ -40,8 +40,8 @@ spec:
     outbound:
       external:
         - host: nav.eye-share.com
-        - host: nav.vieri.no
-        - host: vieri-api-prod.developer.azure-api.net
+        - host: nav.controller.no
+        - host: controller-api-prod.developer.azure-api.net
 
   prometheus:
     enabled: true

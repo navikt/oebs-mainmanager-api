@@ -14,6 +14,7 @@
         <module name="oebs-api-ve-q1_oebsq2-0.4.8-nais-released" />
         <module name="oebs-api-u1.oebsq2" />
         <module name="oebs-api-ve-0.5.4-nais-released (ikke prod)" />
+        <module name="oebs-mainmanager-api" />
         <module name="oebs-api-ve-0.5.5-nais-released" />
         <module name="oebs-api-ve-q" />
         <module name="oebs-api-ve-p_oebsp-0.4.8-nais-released" />
@@ -38,6 +39,7 @@
       <module name="oebs-api-ve-q1_oebsq2-0.4.7-nais" options="-parameters" />
       <module name="oebs-api-ve-q1_oebsq2-0.4.8-nais-released" options="-parameters" />
       <module name="oebs-api-ve-u1" options="-parameters" />
+      <module name="oebs-mainmanager-api" options="-parameters" />
     </option>
   </component>
 </project>
