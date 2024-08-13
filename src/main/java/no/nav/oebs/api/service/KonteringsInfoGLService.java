@@ -15,7 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Transactional(noRollbackFor = { Exception.class })
 public class KonteringsInfoGLService extends ObjektMaps {
 
-	private static final String PLSQL_PROCEDURE = "xxrtv_mainmanager_api.xxrtv_gl_konteringsinfo_api";
+	private static final String PLSQL_PROCEDURE = "xxrtv_mainmanager_api_pkg.xxrtv_gl_konteringsinfo_api";
 
 	private final PlsqlProcedureRepository plsqlProcedureRepository;
 

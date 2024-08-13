@@ -14,7 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Service
 @Transactional(noRollbackFor = { Exception.class })
 public class LeverandorInfoService extends ObjektMaps {
-	private static final String PLSQL_PROCEDURE = "xxrtv_mainmanager_api.xxrtv_leverandoerinfo_api";
+	private static final String PLSQL_PROCEDURE = "xxrtv_mainmanager_api_pkg.xxrtv_leverandoerinfo_api";
 
 	private final PlsqlProcedureRepository plsqlProcedureRepository;
 

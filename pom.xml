@@ -87,6 +87,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <version>1.18.34</version>
             <scope>provided</scope>
         </dependency>
 
@@ -115,18 +116,18 @@
             <version>${springdoc-openapi.version}</version>
         </dependency>
 
-        <dependency>
+        <!--<dependency>
             <groupId>no.nav.security</groupId>
             <artifactId>token-validation-spring</artifactId>
             <version>${token-validation.version}</version>
         </dependency>
 
 
-        <!-- Kreves av NAV token-validation -->
+        &lt;!&ndash; Kreves av NAV token-validation &ndash;&gt;
         <dependency>
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
-        </dependency>
+        </dependency>-->
 
         <!-- Jetty HTTP Client -->
         <dependency>
@@ -134,13 +135,13 @@
             <artifactId>jetty-reactive-httpclient</artifactId>
         </dependency>
 
-        <!-- Nimbus JWT support -->
+       <!--  Nimbus JWT support
         <dependency>
             <groupId>com.nimbusds</groupId>
             <artifactId>nimbus-jose-jwt</artifactId>
             <version>${nimbus-jose-jwt.version}</version>
         </dependency>
-
+-->
         <!-- Commons -->
         <dependency>
             <groupId>org.apache.commons</groupId>

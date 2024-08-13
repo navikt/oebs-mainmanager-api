@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import no.nav.oebs.api.Application;
 import no.nav.oebs.api.common.swagger.MainManagerSwagger;
 import no.nav.oebs.api.service.LeverandorInfoService;
-import no.nav.security.token.support.core.api.Protected;
+//import no.nav.security.token.support.core.api.Protected;
 import io.swagger.v3.oas.annotations.Parameter;
 import no.nav.oebs.api.config.SwaggerConfig;
 import org.slf4j.Logger;
@@ -35,7 +35,7 @@ public class LeverandorInfo {
 		this.leverandorInfoService = serviceLev;
 	}
 
-	@Protected
+	//@Protected
 	@PostMapping(path = "/leverandorinfo")
 	@MainManagerSwagger
 	public String finnLeverandortransaksjoner(
