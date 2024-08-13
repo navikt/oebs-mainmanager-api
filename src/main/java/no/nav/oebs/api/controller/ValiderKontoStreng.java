@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import no.nav.oebs.api.Application;
 import no.nav.oebs.api.common.swagger.MainManagerSwagger;
 import no.nav.oebs.api.service.ValiderKontoStrengService;
-import no.nav.security.token.support.core.api.Protected;
+//import no.nav.security.token.support.core.api.Protected;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,7 +41,7 @@ public class ValiderKontoStreng {
 			this.service = service;
 	}
 
-	@Protected
+	//@Protected
 	@GetMapping(path = "/validerkontostreng")
 	@MainManagerSwagger
 	public String finnValiderKontoStreng(
