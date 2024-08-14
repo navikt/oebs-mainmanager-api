@@ -1,5 +1,6 @@
 package no.nav.oebs.api.exception;
 
+import javax.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -12,7 +13,7 @@ import no.nav.oebs.api.db.entity.ApiError;
 import no.nav.oebs.api.common.utils.ResponseEntityBuilder;
 
 // import javax.security.sasl.AuthenticationException;
-import javax.validation.ConstraintViolationException;
+//import javax.validation.ConstraintViolationException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;

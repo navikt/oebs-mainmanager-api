@@ -97,16 +97,16 @@
         </dependency>
 
         <!-- JAXB (bruker samme artifakter som Spring Boot)-->
-        <dependency>
+        <!--<dependency>
             <groupId>jakarta.xml.bind</groupId>
             <artifactId>jakarta.xml.bind-api</artifactId>
         </dependency>
-
-        <dependency>
+-->
+        <!--<dependency>
             <groupId>org.glassfish.jaxb</groupId>
             <artifactId>jaxb-runtime</artifactId>
             <scope>runtime</scope>
-        </dependency>
+        </dependency>-->
 
         <!-- Swagger -->
         <dependency>
@@ -129,23 +129,23 @@
         </dependency>
 
         <!-- Jetty HTTP Client -->
-        <dependency>
+       <!-- <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-reactive-httpclient</artifactId>
-        </dependency>
+        </dependency>-->
 
         <!-- Nimbus JWT support -->
-        <dependency>
+   <!--     <dependency>
             <groupId>com.nimbusds</groupId>
             <artifactId>nimbus-jose-jwt</artifactId>
             <version>${nimbus-jose-jwt.version}</version>
-        </dependency>
+        </dependency>-->
 
         <!-- Commons -->
-        <dependency>
+        <!--<dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-        </dependency>
+        </dependency>-->
 
         <!-- Test dependencies -->
         <dependency>

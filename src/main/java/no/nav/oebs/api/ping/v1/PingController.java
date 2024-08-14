@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import no.nav.oebs.api.health.HealthCheckDbProbe;
-import no.nav.security.token.support.core.api.Unprotected;
+//import no.nav.security.token.support.core.api.Unprotected;
 
 
  //@RestController
@@ -21,7 +21,7 @@ public class PingController {
 	/**
 	 * Sjekker om databasen er tilgjengelig.
 	 */
-	@Unprotected
+	//@Unprotected
 	@GetMapping(path = "/ping")
 	@PingSwagger
 	public void ping() {

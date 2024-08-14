@@ -23,12 +23,13 @@ public class SwaggerConfig {
 	String versjon;
 
 	public static final String BEARER_TOKEN_AUTH = "BearerToken";
+	public static final String AUTH = "basicAuth";
 
 @Bean
 	public OpenAPI apiInfo() {
 		return new OpenAPI()
 				.info(new Info()
-						.title(env + " - (NAIS)")
+						.title("MainManager - " + env + " API - (NAIS)")
 						.description("""
 								<p>REST API'er som er tilbudt av Oebs.</p>
 								<p>Sikkerhet:</p>
@@ -36,14 +37,18 @@ public class SwaggerConfig {
 								<li>API'et støtter aksesstoken utstedt av Azure AD</li>""")
 						.version(versjon + " " + "("+dato+")"))
 				.components(new Components()
-						.addSecuritySchemes(BEARER_TOKEN_AUTH,
+						/*.addSecuritySchemes(BEARER_TOKEN_AUTH,
 								new SecurityScheme()
 										.type(SecurityScheme.Type.HTTP)
 										.scheme("bearer")
 										.bearerFormat("JWT")
 										.description(
 												"Lim inn aksesstoken utstedt av azure AD uten \"Bearer\" foran."
-										))
+										))*/
+						.addSecuritySchemes(AUTH,
+								new SecurityScheme()
+										.type(SecurityScheme.Type.HTTP)
+										.scheme("basic"))
 				);
 	}
 }
