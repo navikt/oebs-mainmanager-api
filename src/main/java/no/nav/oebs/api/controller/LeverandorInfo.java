@@ -6,11 +6,12 @@ import no.nav.oebs.api.Application;
 import no.nav.oebs.api.common.swagger.MainManagerSwagger;
 import no.nav.oebs.api.service.LeverandorInfoService;
 import no.nav.oebs.api.service.TokenService;
-//import no.nav.security.token.support.core.api.Protected;
 import io.swagger.v3.oas.annotations.Parameter;
 import no.nav.oebs.api.config.SwaggerConfig;
+import no.nav.security.token.support.core.api.Protected;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.*;
@@ -34,6 +35,7 @@ public class LeverandorInfo {
 	@Value("${mainmanager.vendors}")
 	private String mainManagerVendors;
 
+	@Autowired
 	private final TokenService tokenService;
 	private final LeverandorInfoService leverandorInfoService;
 	public LeverandorInfo(TokenService tokenService, LeverandorInfoService serviceLev) {
@@ -41,7 +43,7 @@ public class LeverandorInfo {
 		this.leverandorInfoService = serviceLev;
 	}
 
-	//@Protected
+	@Protected
 	@PostMapping(path = "/leverandorinfo")
 	@MainManagerSwagger
 	public String finnLeverandortransaksjoner(

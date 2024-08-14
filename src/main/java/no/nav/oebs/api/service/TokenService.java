@@ -38,7 +38,7 @@ public class TokenService {
 // Set request headers
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-        // headers.set("User-Agent", "insomnia/9.3.2");
+        // headers.set("User-Agent", "Oebs-MainManger-api/0.0.4");
 
 // Set request body parameters
         MultiValueMap<String, String> requestBody = new LinkedMultiValueMap<>();
@@ -58,7 +58,7 @@ public class TokenService {
                 String accessToken = jsonNode.get("access_token").asText();
 
                 STATUS = "OK";
-
+                logger.info("Inside TokenService:  " + accessToken);
                 return accessToken;
             }
         } catch (Exception e) {

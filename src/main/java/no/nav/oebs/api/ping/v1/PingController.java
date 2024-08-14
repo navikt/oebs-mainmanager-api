@@ -1,5 +1,6 @@
 package no.nav.oebs.api.ping.v1;
 
+import no.nav.security.token.support.core.api.Unprotected;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -21,7 +22,7 @@ public class PingController {
 	/**
 	 * Sjekker om databasen er tilgjengelig.
 	 */
-	//@Unprotected
+	@Unprotected
 	@GetMapping(path = "/ping")
 	@PingSwagger
 	public void ping() {
