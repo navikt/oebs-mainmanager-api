@@ -87,7 +87,6 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.34</version>
             <scope>provided</scope>
         </dependency>
 
@@ -98,16 +97,16 @@
         </dependency>
 
         <!-- JAXB (bruker samme artifakter som Spring Boot)-->
-        <dependency>
+        <!--<dependency>
             <groupId>jakarta.xml.bind</groupId>
             <artifactId>jakarta.xml.bind-api</artifactId>
         </dependency>
-
-        <dependency>
+-->
+        <!--<dependency>
             <groupId>org.glassfish.jaxb</groupId>
             <artifactId>jaxb-runtime</artifactId>
             <scope>runtime</scope>
-        </dependency>
+        </dependency>-->
 
         <!-- Swagger -->
         <dependency>
@@ -116,37 +115,37 @@
             <version>${springdoc-openapi.version}</version>
         </dependency>
 
-        <!--<dependency>
+        <dependency>
             <groupId>no.nav.security</groupId>
             <artifactId>token-validation-spring</artifactId>
             <version>${token-validation.version}</version>
         </dependency>
 
 
-        &lt;!&ndash; Kreves av NAV token-validation &ndash;&gt;
+        <!-- Kreves av NAV token-validation -->
         <dependency>
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
-        </dependency>-->
-
-        <!-- Jetty HTTP Client -->
-        <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-reactive-httpclient</artifactId>
         </dependency>
 
-       <!--  Nimbus JWT support
-        <dependency>
+        <!-- Jetty HTTP Client -->
+       <!-- <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-reactive-httpclient</artifactId>
+        </dependency>-->
+
+        <!-- Nimbus JWT support -->
+   <!--     <dependency>
             <groupId>com.nimbusds</groupId>
             <artifactId>nimbus-jose-jwt</artifactId>
             <version>${nimbus-jose-jwt.version}</version>
-        </dependency>
--->
+        </dependency>-->
+
         <!-- Commons -->
-        <dependency>
+        <!--<dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-        </dependency>
+        </dependency>-->
 
         <!-- Test dependencies -->
         <dependency>

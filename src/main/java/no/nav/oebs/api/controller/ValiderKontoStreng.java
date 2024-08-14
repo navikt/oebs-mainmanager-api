@@ -1,16 +1,19 @@
 package no.nav.oebs.api.controller;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
+import javax.validation.constraints.NotEmpty;
 import lombok.extern.slf4j.Slf4j;
 import no.nav.oebs.api.Application;
 import no.nav.oebs.api.common.swagger.MainManagerSwagger;
+import no.nav.oebs.api.service.TokenService;
 import no.nav.oebs.api.service.ValiderKontoStrengService;
-//import no.nav.security.token.support.core.api.Protected;
+import no.nav.security.token.support.core.api.Protected;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import no.nav.oebs.api.config.SwaggerConfig;
-import org.springframework.http.MediaType;
+import org.springframework.http.*;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,12 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import io.swagger.v3.oas.annotations.Parameter;
 
-/*
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiParam;
-*/
-
-import javax.validation.constraints.NotEmpty;
+import java.util.Objects;
 
 @Slf4j
 @RestController
@@ -34,11 +32,13 @@ public class ValiderKontoStreng {
 
 	private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
-	private ValiderKontoStrengService service;
+	private TokenService tokenService;
+
+	private ValiderKontoStrengService validerKontoStrengService;
 	private String produktoppgave;
 
 	public ValiderKontoStreng(ValiderKontoStrengService service) { //,
-			this.service = service;
+			this.validerKontoStrengService = service;
 	}
 
 	//@Protected
@@ -62,19 +62,25 @@ public class ValiderKontoStreng {
 
 			{
 
-		return service.finnValiderKontoStreng(org_id,
-				artskonto,
-				ksted,
-				produktoppgave,
-				deloppgave,
-				fellesoppgave,
-				statskonto,
-				kilde,
-				tilsagnsaar,
-				fritt_felt_1,
-				fritt_felt_2,
-				fullmaktskode,
-				regnskapsforer,
-			    system);
-	}
+				String tokenet = tokenService.genererToken();
+
+				if (Objects.equals(TokenService.STATUS, "OK")) {
+
+					return validerKontoStrengService.finnValiderKontoStreng(org_id,
+							artskonto,
+							ksted,
+							produktoppgave,
+							deloppgave,
+							fellesoppgave,
+							statskonto,
+							kilde,
+							tilsagnsaar,
+							fritt_felt_1,
+							fritt_felt_2,
+							fullmaktskode,
+							regnskapsforer,
+							system);
+				}
+                return "Feil validering ..";
+			}
 }

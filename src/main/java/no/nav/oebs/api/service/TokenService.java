@@ -1,23 +1,22 @@
 package no.nav.oebs.api.service;
 
-import io.swagger.v3.oas.annotations.Parameter;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import no.nav.oebs.api.Application;
-import no.nav.oebs.api.common.swagger.MainManagerSwagger;
-//import no.nav.security.token.support.core.api.Protected;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.*;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
-import java.time.LocalDate;
-import java.util.Collections;
 
+@Service
 public class TokenService {
 
+    public static String STATUS = "";
     private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
     @Value("${mainmanager.username}")
@@ -32,29 +31,41 @@ public class TokenService {
     @Value("${mainmanager.url.token}")
     private String mainManagerUrlToken;
 
-
     public String genererToken() {
 
         RestTemplate restTemplate = new RestTemplate();
+
+// Set request headers
         HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+        // headers.set("User-Agent", "insomnia/9.3.2");
 
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+// Set request body parameters
+        MultiValueMap<String, String> requestBody = new LinkedMultiValueMap<>();
+        requestBody.add("username", mainManagerUserName);
+        requestBody.add("password", mainManagerPassword);
+        requestBody.add("grant_type", mainManagerGrantType);
 
-        headers.set("username", mainManagerUserName);
-        headers.set("password", mainManagerPassword);
-        headers.set("grant_type", mainManagerGrantType);
+// Make the POST request
+        String url = mainManagerUrlToken;
+        ResponseEntity<String> responseEntity = restTemplate.postForEntity(url, requestBody, String.class);
 
-        HttpEntity<String> entity = new HttpEntity<>(headers);
+        try {
+            if (responseEntity.getStatusCode().equals(HttpStatus.OK)) {
+                String jsonText = responseEntity.getBody();
+                ObjectMapper objectMapper = new ObjectMapper();
+                JsonNode jsonNode = objectMapper.readTree(jsonText);
+                String accessToken = jsonNode.get("access_token").asText();
 
-        ResponseEntity<String> response = restTemplate.postForEntity(mainManagerUrlToken, entity, String.class);
+                STATUS = "OK";
 
-        if (response.getStatusCode() == HttpStatus.OK) {
-            logger.info("200 OK: {}", response.getBody());
-            return response.getBody();
-        } else {
-            logger.info("{}", response.getStatusCode());
-            return "request failet";
+                return accessToken;
+            }
+        } catch (Exception e) {
+           return responseEntity.getBody();
         }
+
+        return null;
     }
 }
+
