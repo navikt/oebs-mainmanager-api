@@ -1,5 +1,6 @@
 package no.nav.oebs.api.health;
 
+import no.nav.security.token.support.core.api.Unprotected;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +21,7 @@ public class HealthCheckController {
 		this.healthCheckDbProbe = healthCheckDbProbe;
 	}
 
-	//@Unprotected
+	@Unprotected
 	@GetMapping(path = "/isready")
 	public void isReady() {
 		healthCheckDbProbe.pingDatabase();
@@ -28,7 +29,7 @@ public class HealthCheckController {
 		logger.debug("/isready");
 	}
 
-	//@Unprotected
+	@Unprotected
 	@GetMapping(path = "/isalive")
 	public void isalive() {
 		healthCheckDbProbe.pingDatabase();

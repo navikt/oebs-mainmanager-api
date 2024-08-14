@@ -37,14 +37,14 @@ public class SwaggerConfig {
 								<li>API'et støtter aksesstoken utstedt av Azure AD</li>""")
 						.version(versjon + " " + "("+dato+")"))
 				.components(new Components()
-						/*.addSecuritySchemes(BEARER_TOKEN_AUTH,
+						.addSecuritySchemes(BEARER_TOKEN_AUTH,
 								new SecurityScheme()
 										.type(SecurityScheme.Type.HTTP)
 										.scheme("bearer")
 										.bearerFormat("JWT")
 										.description(
 												"Lim inn aksesstoken utstedt av azure AD uten \"Bearer\" foran."
-										))*/
+										))
 						.addSecuritySchemes(AUTH,
 								new SecurityScheme()
 										.type(SecurityScheme.Type.HTTP)

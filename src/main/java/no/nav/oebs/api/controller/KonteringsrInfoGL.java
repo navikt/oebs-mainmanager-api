@@ -10,8 +10,10 @@ import no.nav.oebs.api.service.KonteringsInfoGLService;
 import no.nav.oebs.api.service.TokenService;
 //import no.nav.security.token.support.core.api.Protected;
 import no.nav.oebs.api.config.SwaggerConfig;
+import no.nav.security.token.support.core.api.Protected;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.*;
@@ -38,13 +40,14 @@ public class KonteringsrInfoGL {
 
 	private final KonteringsInfoGLService konteringsInfoGLService;
 
-	private final TokenService tokenService;
+	@Autowired
+	private TokenService tokenService;
 	public KonteringsrInfoGL(KonteringsInfoGLService serviceKont, TokenService tokenService) { //,
 		this.konteringsInfoGLService = serviceKont;
         this.tokenService = tokenService;
     }
 
-	//@Protected
+	@Protected
 	@PostMapping(path = "/gl_konteringsinfo")
 	@MainManagerSwagger
 	//@SecurityRequirement(name = "basicAuth")
@@ -67,6 +70,7 @@ public class KonteringsrInfoGL {
 
 			headers.setContentType(MediaType.APPLICATION_JSON);
 			headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+			headers.setBearerAuth(tokenet);
 
 			String kont = konteringsInfoGLService.finnGLKonteringsInfoTransaksjoner(org_id, segmentname, segmentverdi, lastupdatedate);
 

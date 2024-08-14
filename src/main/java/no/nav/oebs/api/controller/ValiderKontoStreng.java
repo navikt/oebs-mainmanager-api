@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import no.nav.oebs.api.config.SwaggerConfig;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +33,7 @@ public class ValiderKontoStreng {
 
 	private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
+	@Autowired
 	private TokenService tokenService;
 
 	private ValiderKontoStrengService validerKontoStrengService;
@@ -41,7 +43,7 @@ public class ValiderKontoStreng {
 			this.validerKontoStrengService = service;
 	}
 
-	//@Protected
+	@Protected
 	@GetMapping(path = "/validerkontostreng")
 	@MainManagerSwagger
 	public String finnValiderKontoStreng(
@@ -63,7 +65,7 @@ public class ValiderKontoStreng {
 			{
 
 				String tokenet = tokenService.genererToken();
-
+				logger.info("Inside Valider:  " + tokenet);
 				if (Objects.equals(TokenService.STATUS, "OK")) {
 
 					return validerKontoStrengService.finnValiderKontoStreng(org_id,
