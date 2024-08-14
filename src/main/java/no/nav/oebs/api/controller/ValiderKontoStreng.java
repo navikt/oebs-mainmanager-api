@@ -7,6 +7,8 @@ import no.nav.oebs.api.Application;
 import no.nav.oebs.api.common.swagger.MainManagerSwagger;
 import no.nav.oebs.api.service.TokenService;
 import no.nav.oebs.api.service.ValiderKontoStrengService;
+import no.nav.security.token.support.core.api.Protected;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

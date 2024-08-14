@@ -1,7 +1,5 @@
 package no.nav.oebs.api.service;
 
-
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import no.nav.oebs.api.Application;
