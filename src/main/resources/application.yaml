@@ -30,9 +30,11 @@ springdoc:
     disable-swagger-default-url: true
     tags-sorter: alpha
 
-# logging:
+#logging:
 #  level:
 #    com.zaxxer.hikari: DEBUG
 #    root: warn
 #    org.springframework.web: debug
 #    org.hibernate: error
+     #org.springframework: DEBUG
+     #root: INFO

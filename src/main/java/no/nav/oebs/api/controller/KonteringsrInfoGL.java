@@ -1,14 +1,11 @@
 package no.nav.oebs.api.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import no.nav.oebs.api.Application;
 import no.nav.oebs.api.common.swagger.MainManagerSwagger;
 import no.nav.oebs.api.service.KonteringsInfoGLService;
 import no.nav.oebs.api.service.TokenService;
-//import no.nav.security.token.support.core.api.Protected;
 import no.nav.oebs.api.config.SwaggerConfig;
 import no.nav.security.token.support.core.api.Protected;
 import org.slf4j.Logger;
@@ -22,7 +19,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
-import java.rmi.AccessException;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Objects;
@@ -59,7 +55,7 @@ public class KonteringsrInfoGL {
 				@Parameter(description = "f.eks. B00001") String segmentverdi,
 			@RequestParam(name = "lastupdatedate", defaultValue = "")
 				@Parameter(description = "f.eks. 2022-12-25")
-					@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate lastupdatedate) throws Exception {
+					@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate lastupdatedate) {
 
 		String tokenet = tokenService.genererToken();
 
