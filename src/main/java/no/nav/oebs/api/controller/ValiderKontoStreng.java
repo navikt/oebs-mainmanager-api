@@ -5,7 +5,6 @@ import javax.validation.constraints.NotEmpty;
 import lombok.extern.slf4j.Slf4j;
 import no.nav.oebs.api.Application;
 import no.nav.oebs.api.common.swagger.MainManagerSwagger;
-import no.nav.oebs.api.service.TokenService;
 import no.nav.oebs.api.service.ValiderKontoStrengService;
 import no.nav.security.token.support.core.api.Protected;
 
@@ -13,7 +12,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import no.nav.oebs.api.config.SwaggerConfig;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import io.swagger.v3.oas.annotations.Parameter;
 
-import java.util.Objects;
 
 @Slf4j
 @RestController
@@ -33,11 +30,7 @@ public class ValiderKontoStreng {
 
 	private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
-	@Autowired
-	private TokenService tokenService;
-
 	private ValiderKontoStrengService validerKontoStrengService;
-	private String produktoppgave;
 
 	public ValiderKontoStreng(ValiderKontoStrengService service) { //,
 			this.validerKontoStrengService = service;
@@ -63,11 +56,6 @@ public class ValiderKontoStreng {
 			@RequestParam(name = "system") @NotEmpty @Parameter(description = "f.eks. EYE-SHARE eller VIERI") String system)
 
 			{
-
-				String tokenet = tokenService.genererToken();
-				logger.info("Inside Valider:  " + tokenet);
-				if (Objects.equals(TokenService.STATUS, "OK")) {
-
 					return validerKontoStrengService.finnValiderKontoStreng(org_id,
 							artskonto,
 							ksted,
@@ -83,6 +71,4 @@ public class ValiderKontoStreng {
 							regnskapsforer,
 							system);
 				}
-                return "Feil validering ..";
-			}
 }

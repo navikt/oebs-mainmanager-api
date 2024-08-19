@@ -61,6 +61,8 @@ public class LeverandorInfo {
 
 		String tokenet = tokenService.genererToken();
 
+		logger.info(tokenet);
+
 		if (Objects.equals(TokenService.STATUS, "OK")) {
 
 			RestTemplate restTemplate = new RestTemplate();
