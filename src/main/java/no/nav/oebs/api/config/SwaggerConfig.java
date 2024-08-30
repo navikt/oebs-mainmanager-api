@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class SwaggerConfig {
-	public static final String MAINMANAGER = "MAINMANAGER API";
+	public static final String MAINMANAGER = "OeBS API";
 
 	@Value("${oebs.environment}")
 	String env;
@@ -29,7 +29,7 @@ public class SwaggerConfig {
 	public OpenAPI apiInfo() {
 		return new OpenAPI()
 				.info(new Info()
-						.title("MainManager - " + env + " API - (NAIS)")
+						.title(env + " API")
 						.description("""
 								<p>REST API'er som er tilbudt av Oebs.</p>
 								<p>Sikkerhet:</p>

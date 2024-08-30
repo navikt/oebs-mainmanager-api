@@ -6,7 +6,7 @@ metadata:
   labels:
     team: team-oebs
 spec:
-  image: repo.adeo.no:5443/oebs/oebs-mainmanager-api:0.0.8
+  image: repo.adeo.no:5443/oebs/oebs-mainmanager-api:0.2.7
   port: 8080
   replicas:
     min: 1
@@ -32,12 +32,6 @@ spec:
       enabled: true
       allowAllUsers: true
       tenant: nav.no
-  #accessPolicy:
-  #  inbound:
-  #    rules:
-  #       - application: oebs-mainmanager-api-t1
-  #         namespace: team-oebs
-  #         cluster: dev-fss
 
   prometheus:
     enabled: true

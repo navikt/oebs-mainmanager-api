@@ -25,7 +25,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 @RestController
 @Validated
 @RequestMapping(path = "/api/v1", produces = MediaType.APPLICATION_JSON_VALUE + ";charset=UTF-8")
-@Tag(name = SwaggerConfig.MAINMANAGER, description = "MAINMANAGER API")
+@Tag(name = SwaggerConfig.MAINMANAGER) //, description = "MAINMANAGER API")
 public class ValiderKontoStreng {
 
 	private static final Logger logger = LoggerFactory.getLogger(Application.class);
@@ -47,13 +47,13 @@ public class ValiderKontoStreng {
 			@RequestParam(name = "oppgave") @NotEmpty @Parameter(description = "f.eks. 000000") String deloppgave,
 			@RequestParam(name = "felles") @NotEmpty @Parameter(description = "f.eks. L01002") String fellesoppgave,
 			@RequestParam(name = "statskonto") @NotEmpty @Parameter(description = "f.eks. 266175000000") String statskonto,
-			@RequestParam(name = "kilde") @NotEmpty @Parameter(description = "f.eks. 000000") String kilde,
+			@RequestParam(name = "kilde") @NotEmpty @Parameter(description = "AP/AR") String kilde,
 			@RequestParam(name = "tilsagnsaar") @NotEmpty @Parameter(description = "f.eks. 000000") String tilsagnsaar,
 			@RequestParam(name = "fritt_felt_1") @NotEmpty @Parameter(description = "f.eks. 000000") String fritt_felt_1,
 			@RequestParam(name = "fritt_felt_2") @NotEmpty @Parameter(description = "f.eks. 000000") String fritt_felt_2,
 			@RequestParam(name = "fullmaktskode") @NotEmpty @Parameter(description = "f.eks. Z1") String fullmaktskode,
 			@RequestParam(name = "regnskapsforer") @NotEmpty @Parameter(description = "f.eks. 80") String regnskapsforer,
-			@RequestParam(name = "system") @NotEmpty @Parameter(description = "f.eks. EYE-SHARE eller VIERI") String system)
+			@RequestParam(name = "system", defaultValue = "MAINMANAGER") String system)
 
 			{
 					return validerKontoStrengService.finnValiderKontoStreng(org_id,

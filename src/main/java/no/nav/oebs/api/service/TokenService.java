@@ -1,20 +1,28 @@
 package no.nav.oebs.api.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import no.nav.oebs.api.Application;
+import no.nav.oebs.api.config.ProxyConfig;
 import no.nav.security.token.support.core.api.Unprotected;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
+import org.springframework.http.client.ClientHttpRequestFactory;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 
-@Unprotected
+
 @Service
 public class TokenService {
 
@@ -33,41 +41,38 @@ public class TokenService {
     @Value("${mainmanager.url.token}")
     private String mainManagerUrlToken;
 
-    public String genererToken() {
+    @Autowired
+    ProxyConfig proxyConfig;
 
-        RestTemplate restTemplate = new RestTemplate();
+    public String genererToken() throws Exception {
 
-// Set request headers
+        RestTemplate restTemplate = new RestTemplate(proxyConfig.requestFactory());
+
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
         // headers.set("User-Agent", "Oebs-MainManger-api/0.0.4");
 
-// Set request body parameters
         MultiValueMap<String, String> requestBody = new LinkedMultiValueMap<>();
         requestBody.add("username", mainManagerUserName);
         requestBody.add("password", mainManagerPassword);
         requestBody.add("grant_type", mainManagerGrantType);
 
-// Make the POST request
         String url = mainManagerUrlToken;
+
         ResponseEntity<String> responseEntity = restTemplate.postForEntity(url, requestBody, String.class);
 
-        try {
-            if (responseEntity.getStatusCode().equals(HttpStatus.OK)) {
-                String jsonText = responseEntity.getBody();
-                ObjectMapper objectMapper = new ObjectMapper();
-                JsonNode jsonNode = objectMapper.readTree(jsonText);
-                String accessToken = jsonNode.get("access_token").asText();
+        if (responseEntity.getStatusCode().equals(HttpStatus.OK)) {
+            String jsonText = responseEntity.getBody();
+            ObjectMapper objectMapper = new ObjectMapper();
+            JsonNode jsonNode = objectMapper.readTree(jsonText);
+            String accessToken = jsonNode.get("access_token").asText();
 
-                STATUS = "OK";
-                logger.info("Inside TokenService:  " + accessToken);
-                return accessToken;
-            }
-        } catch (Exception e) {
-           return responseEntity.getBody();
+            STATUS = "OK";
+            return accessToken;
         }
-
-        return null;
+        else {
+            return responseEntity.getBody();
+        }
     }
 }
 
