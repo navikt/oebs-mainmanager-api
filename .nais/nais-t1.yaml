@@ -6,7 +6,7 @@ metadata:
   labels:
     team: team-oebs
 spec:
-  image: repo.adeo.no:5443/oebs/oebs-mainmanager-api:0.2.7
+  image: repo.adeo.no:5443/oebs/oebs-mainmanager-api:0.2.8
   port: 8080
   replicas:
     min: 1
