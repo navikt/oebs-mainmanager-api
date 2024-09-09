@@ -50,7 +50,7 @@ public class KonteringService {
 
                 HttpEntity<String> entity = new HttpEntity<>(kont, headers);
 
-                ResponseEntity<String> response = restTemplate.exchange(mainManagerUrl, HttpMethod.PUT, entity, String.class);
+                ResponseEntity<String> response = restTemplate.exchange(mainManagerUrl, HttpMethod.POST, entity, String.class);
 
                 if (response.getStatusCode() == HttpStatus.OK) {
                     logger.info("200 OK: {}", response.getBody());

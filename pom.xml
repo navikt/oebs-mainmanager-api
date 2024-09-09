@@ -4,7 +4,7 @@
 
     <groupId>no.nav.oebs</groupId>
     <artifactId>oebs-mainmanager-api</artifactId>
-    <version>0.2.7</version>
+    <version>0.2.8</version>
 
     <parent>
         <groupId>org.springframework.boot</groupId>

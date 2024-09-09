@@ -37,7 +37,7 @@ public class GlKonteringsInfoArtKonto {
     KonteringService konteringService;
 
     @Unprotected
-    @PutMapping(path = "/gl_konteringsinfo_artskonto")
+    @PostMapping(path = "/gl_konteringsinfo_artskonto")
     @MainManagerSwagger
     //@SecurityRequirement(name = "basicAuth")
     public String glArtKontoTransaksjoner(
