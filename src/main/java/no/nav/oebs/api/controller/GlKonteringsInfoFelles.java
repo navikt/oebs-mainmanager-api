@@ -37,13 +37,13 @@ public class GlKonteringsInfoFelles {
     KonteringService konteringService;
 
     @Unprotected
-    @PutMapping(path = "/gl_konteringsinfo_felles")
+    @PostMapping(path = "/gl_konteringsinfo_felles")
     @MainManagerSwagger
     //@SecurityRequirement(name = "basicAuth")
     public String glArtKontoTransaksjoner(
             @RequestParam(name = "org id", defaultValue = "202") Integer org_id,
             @RequestParam(name = "segmentverdi", required = false)
-            @Parameter(description = "f.eks. B00001") String segmentverdi,
+            @Parameter(description = "f.eks. L01005") String segmentverdi,
             @RequestParam(name = "lastupdatedate", defaultValue = "")
             @Parameter(description = "f.eks. 2022-12-25")
             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate lastupdatedate) throws Exception {
