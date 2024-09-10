@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Documentation</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/3.51.1/swagger-ui.css" />
+</head>
+<body>
+<div id="swagger-ui"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/3.51.1/swagger-ui-bundle.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/3.51.1/swagger-ui-standalone-preset.js"></script>
+<script>
+    SwaggerUIBundle({
+        url: "https://oebs-mainmanager-api-t1.dev.intern.nav.no/v3/api-docs",  // Your OpenAPI spec URL
+        dom_id: '#swagger-ui',
+        presets: [
+            SwaggerUIBundle.presets.apis,
+            SwaggerUIStandalonePreset
+        ],
+        layout: "BaseLayout",
+        sorter: function(a, b) {
+            // Custom order of the API paths (non-deprecated first)
+            const customOrder = [
+                "/api/v1/gl_konteringsinfo_artskonto",
+                "/api/v1/gl_konteringsinfo_kostnadssted",
+                "/api/v1/gl_konteringsinfo_produkt",
+                "/api/v1/gl_konteringsinfo_oppgave",
+                "/api/v1/gl_konteringsinfo_felles",
+                "/api/v1/gl_konteringsinfo_statskonto"
+            ];
+
+            // Get the path of each endpoint
+            const pathA = a.get("path");
+            const pathB = b.get("path");
+
+            // Check if either endpoint is deprecated
+            const deprecatedA = a.get("deprecated") || false;
+            const deprecatedB = b.get("deprecated") || false;
+
+            // If one is deprecated and the other isn't, the deprecated one goes to the bottom
+            if (deprecatedA && !deprecatedB) return 1;  // A is deprecated, so it comes after B
+            if (!deprecatedA && deprecatedB) return -1; // B is deprecated, so it comes after A
+
+            // If neither or both are deprecated, follow the custom order
+            const indexA = customOrder.indexOf(pathA);
+            const indexB = customOrder.indexOf(pathB);
+
+            // If both endpoints are in the custom order array, compare by their index
+            if (indexA !== -1 && indexB !== -1) return indexA - indexB;
+
+            // If one endpoint is in the custom order array, prioritize it
+            if (indexA !== -1) return -1;
+            if (indexB !== -1) return 1;
+
+            // If neither are in the custom order array, fall back to alphabetical ordering
+            return pathA.localeCompare(pathB);
+        }
+    });
+</script>
+</body>
+</html>
