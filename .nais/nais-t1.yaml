@@ -6,7 +6,7 @@ metadata:
   labels:
     team: team-oebs
 spec:
-  image: repo.adeo.no:5443/oebs/oebs-mainmanager-api:0.3.0
+  image: repo.adeo.no:5443/oebs/oebs-mainmanager-api:0.3.1
   port: 8080
   replicas:
     min: 1
@@ -32,15 +32,18 @@ spec:
       enabled: true
       allowAllUsers: true
       tenant: nav.no
+  envFrom:
+    - secret: main-manager
 
   prometheus:
     enabled: true
     path: /actuator/prometheus
-  vault:
-    enabled: true
-    paths:
-      - kvPath: "kv/preprod/fss/oebs-mainmanager-api-t1/team-oebs"
-        mountPath: "/var/run/secrets/nais.io/vault"
+#  vault:
+#    enabled: true
+#    paths:
+#      - kvPath: "kv/preprod/fss/oebs-mainmanager-api-t1/team-oebs"
+#        mountPath: "/var/run/secrets/nais.io/vault"
 
   ingresses:
-     - "https://oebs-mainmanager-api-t1.dev.intern.nav.no"
+     - "https://oebs-mainmanager-api-t1.intern.dev.nav.no"
+     - "https://oebs-mainmanager-api-t1.ekstern.dev.nav.no"

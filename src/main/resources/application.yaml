@@ -4,7 +4,7 @@ server:
 
 spring:
   profiles:
-     active: nais
+     active: t1
   datasource:
     driver-class-name: oracle.jdbc.OracleDriver
   jpa:
