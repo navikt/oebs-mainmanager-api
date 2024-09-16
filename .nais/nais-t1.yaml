@@ -4,6 +4,7 @@ metadata:
   name: oebs-mainmanager-api-t1
   namespace: team-oebs
   labels:
+    app: oebs-mainmanager-api-t1
     team: team-oebs
 spec:
   image: {{ image }}

@@ -1,4 +1,4 @@
-name: Build and push
+name: Build and push and deploy
 on:
   push:
     branches:
@@ -20,7 +20,7 @@ jobs:
           java-version: '18'
 
       - name: Build with Maven
-        run: mvn clean install -DskipTests
+        run: mvn clean install -DskipTests -X
 
       - uses: nais/docker-build-push@v0
         id: docker-push
@@ -36,6 +36,13 @@ jobs:
           project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }} # required, but is defined as an organization variable
           identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }} # required, but is defined as an organization secret
           salsa: true
+
+      - name: Get logs from Kubernetes
+        run: |
+          kubectl get pods -l app=oebs-mainmanager-api-t1
+          kubectl logs -l app=oebs-mainmanager-api-t1 --tail=100
+      
+
       - name: Deploy
         uses: nais/deploy/actions/deploy@v2
         env:
