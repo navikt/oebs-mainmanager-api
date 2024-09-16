@@ -43,6 +43,9 @@ springdoc:
      #root: INFO
 logging:
   level:
-    no.nav: DEBUG
-    org.springframework: DEBUG
-    org.hibernate: DEBUG
+    logging:
+      level:
+        org:
+          springframework:
+            core:
+              env: DEBUG
