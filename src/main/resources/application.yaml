@@ -12,7 +12,7 @@ spring:
       ddl-auto: none
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.OracleDialect
+        dialect: org.hibernate.dialect.Oracle12cDialect
     show-sql: false
     open-in-view: false
 
