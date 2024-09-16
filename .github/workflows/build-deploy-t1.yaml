@@ -37,12 +37,6 @@ jobs:
           identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }} # required, but is defined as an organization secret
           salsa: true
 
-      - name: Get logs from Kubernetes
-        run: |
-          kubectl get pods -l app=oebs-mainmanager-api-t1
-          kubectl logs -l app=oebs-mainmanager-api-t1 --tail=100
-      
-
       - name: Deploy
         uses: nais/deploy/actions/deploy@v2
         env:
