@@ -3,6 +3,7 @@ package no.nav.oebs.api.controller;
 import antlr.Token;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import no.nav.oebs.api.common.swagger.MainManagerSwagger;
 import no.nav.oebs.api.config.ProxyConfig;
 import no.nav.oebs.api.service.ArtikkelInfoService;
 import no.nav.oebs.api.service.TokenService;
@@ -54,6 +55,7 @@ public class ArtikkelInfo {
 
     @Unprotected
     @PostMapping(path = "/artikkelinfo")
+    @MainManagerSwagger
     public String finnArtikkelInfoTransaksjoner(
             @RequestParam(name = "org_id", defaultValue = "202") Integer org_id,
             @RequestParam(name = "artikkelnavn", required = false)
