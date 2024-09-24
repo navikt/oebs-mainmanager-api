@@ -1,26 +1,16 @@
 package no.nav.oebs.api.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import no.nav.oebs.api.Application;
-import no.nav.oebs.api.config.ProxyConfig;
-import no.nav.security.token.support.core.api.Unprotected;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
-import org.springframework.http.client.ClientHttpRequestFactory;
-import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
-
-import java.net.InetSocketAddress;
-import java.net.Proxy;
 
 
 @Service
@@ -41,12 +31,7 @@ public class TokenService {
     @Value("${mainmanager.url.token}")
     private String mainManagerUrlToken;
 
-    //@Autowired
-    //ProxyConfig proxyConfig;
-
     public String genererToken() throws Exception {
-
-        //RestTemplate restTemplate = new RestTemplate(proxyConfig.requestFactory());
 
         RestTemplate restTemplate = new RestTemplate();
 

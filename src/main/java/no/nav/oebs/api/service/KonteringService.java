@@ -1,7 +1,6 @@
 package no.nav.oebs.api.service;
 
 import no.nav.oebs.api.Application;
-import no.nav.oebs.api.config.ProxyConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +16,6 @@ import java.util.Objects;
 public class KonteringService {
 
     private static final Logger logger = LoggerFactory.getLogger(Application.class);
-
-    @Autowired
-    ProxyConfig proxyConfig;
 
     @Autowired
     KonteringsInfoGLService konteringsInfoGLService;
