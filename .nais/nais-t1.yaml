@@ -32,7 +32,7 @@ spec:
     application:
       enabled: true
       allowAllUsers: true
-      tenant: nav.no
+      tenant: trygdeetaten.no
   envFrom:
     - secret: main-manager
 
