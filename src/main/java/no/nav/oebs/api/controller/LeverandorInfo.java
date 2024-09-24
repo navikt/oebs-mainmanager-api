@@ -5,7 +5,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import no.nav.oebs.api.Application;
 import no.nav.oebs.api.common.swagger.MainManagerSwagger;
-import no.nav.oebs.api.config.ProxyConfig;
 import no.nav.oebs.api.service.LeverandorInfoService;
 import no.nav.oebs.api.service.TokenService;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -43,8 +42,6 @@ public class LeverandorInfo {
 	@Autowired
 	private final TokenService tokenService;
 
-	@Autowired
-	ProxyConfig proxyConfig;
 	private final LeverandorInfoService leverandorInfoService;
 	public LeverandorInfo(TokenService tokenService, LeverandorInfoService serviceLev) {
         this.tokenService = tokenService; //,
@@ -71,7 +68,7 @@ public class LeverandorInfo {
 
 		if (Objects.equals(TokenService.STATUS, "OK")) {
 
-			RestTemplate restTemplate = new RestTemplate(proxyConfig.requestFactory());
+			RestTemplate restTemplate = new RestTemplate();
 			HttpHeaders headers = new HttpHeaders();
 
 			headers.setContentType(MediaType.APPLICATION_JSON);
@@ -115,7 +112,7 @@ public class LeverandorInfo {
 
 		if (Objects.equals(TokenService.STATUS, "OK")) {
 
-			RestTemplate restTemplate = new RestTemplate(proxyConfig.requestFactory());
+			RestTemplate restTemplate = new RestTemplate();
 			HttpHeaders headers = new HttpHeaders();
 
 			headers.setContentType(MediaType.APPLICATION_JSON);
