@@ -39,11 +39,6 @@ spec:
   prometheus:
     enabled: true
     path: /actuator/prometheus
-#  vault:
-#    enabled: true
-#    paths:
-#      - kvPath: "kv/preprod/fss/oebs-mainmanager-api-t1/team-oebs"
-#        mountPath: "/var/run/secrets/nais.io/vault"
 
   ingresses:
      - "https://oebs-mainmanager-api-t1.intern.dev.nav.no"

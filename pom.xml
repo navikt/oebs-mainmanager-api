@@ -4,7 +4,7 @@
 
     <groupId>no.nav.oebs</groupId>
     <artifactId>oebs-mainmanager-api</artifactId>
-    <version>0.3.4</version>
+    <version>0.3.5</version>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -97,18 +97,6 @@
             <artifactId>micrometer-registry-prometheus</artifactId>
         </dependency>
 
-        <!-- JAXB (bruker samme artifakter som Spring Boot)-->
-        <!--<dependency>
-            <groupId>jakarta.xml.bind</groupId>
-            <artifactId>jakarta.xml.bind-api</artifactId>
-        </dependency>
--->
-        <!--<dependency>
-            <groupId>org.glassfish.jaxb</groupId>
-            <artifactId>jaxb-runtime</artifactId>
-            <scope>runtime</scope>
-        </dependency>-->
-
         <!-- Swagger -->
         <dependency>
             <groupId>org.springdoc</groupId>
@@ -128,25 +116,6 @@
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
         </dependency>
-
-        <!-- Jetty HTTP Client -->
-       <!-- <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-reactive-httpclient</artifactId>
-        </dependency>-->
-
-        <!-- Nimbus JWT support -->
-   <!--     <dependency>
-            <groupId>com.nimbusds</groupId>
-            <artifactId>nimbus-jose-jwt</artifactId>
-            <version>${nimbus-jose-jwt.version}</version>
-        </dependency>-->
-
-        <!-- Commons -->
-        <!--<dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-        </dependency>-->
 
         <!-- Test dependencies -->
         <dependency>
