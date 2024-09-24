@@ -16,8 +16,8 @@ public class ProxyConfig {
     public SimpleClientHttpRequestFactory requestFactory() {
         SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
 
-        //Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("webproxy-nais.nav.no", 8088));
-        //factory.setProxy(proxy);
+        Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("webproxy-nais.nav.no", 8088));
+        factory.setProxy(proxy);
 
         return factory;
     }

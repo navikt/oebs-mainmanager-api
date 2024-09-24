@@ -41,12 +41,14 @@ public class TokenService {
     @Value("${mainmanager.url.token}")
     private String mainManagerUrlToken;
 
-    @Autowired
-    ProxyConfig proxyConfig;
+    //@Autowired
+    //ProxyConfig proxyConfig;
 
     public String genererToken() throws Exception {
 
-        RestTemplate restTemplate = new RestTemplate(proxyConfig.requestFactory());
+        //RestTemplate restTemplate = new RestTemplate(proxyConfig.requestFactory());
+
+        RestTemplate restTemplate = new RestTemplate();
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);

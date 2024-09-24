@@ -36,9 +36,9 @@ public class KonteringService {
         try {
             if (Objects.equals(TokenService.STATUS, "OK")) {
 
-                RestTemplate restTemplate = new RestTemplate(proxyConfig.requestFactory());
+                //RestTemplate restTemplate = new RestTemplate(proxyConfig.requestFactory());
 
-                // RestTemplate restTemplate = new RestTemplate();
+                RestTemplate restTemplate = new RestTemplate();
 
                 HttpHeaders headers = new HttpHeaders();
 
