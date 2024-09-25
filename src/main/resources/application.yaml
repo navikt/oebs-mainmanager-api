@@ -4,9 +4,12 @@ server:
 
 spring:
   profiles:
-     active: gcp
+     active: t1
   datasource:
     driver-class-name: oracle.jdbc.OracleDriver
+    username: ${APPS_USER}
+    password: ${APPS_PASSWORD}
+    url: ${DB_URL}
   jpa:
     hibernate:
       ddl-auto: none
@@ -15,6 +18,29 @@ spring:
         dialect: org.hibernate.dialect.Oracle12cDialect
     show-sql: false
     open-in-view: false
+  application:
+    name: ${APP_NAME}
+
+oebs:
+  environment: Oebst1
+  version: 0.3.0
+  date: 10.09.2024
+
+mainmanager:
+  vendors:
+    usted: ${MM_VENDORS}
+    sted: ${MM_VENDORS_STED}
+  url:
+    token: ${MM_URL_TOKEN}
+  artskonto: ${MM_ART}
+  kostnadssted: ${MM_KOSTNADSSTED}
+  produkt: ${MM_PRODUKT}
+  oppgave: ${MM_OPPGAVE}
+  statsregnskapskonto: ${MM_STATSREGNSKAPSKONTO}
+  felles: ${MM_FELLES}
+  username: ${MM_USER}
+  password: ${MM_PASSWORD}
+  grant_type: ${MM_GRANT_TYPE}
 
 debug: true
 

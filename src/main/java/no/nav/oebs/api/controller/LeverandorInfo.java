@@ -36,7 +36,7 @@ public class LeverandorInfo {
 
 	@Value("${mainmanager.vendors.sted}")
 	private String mainManagerVendorsSted;
-	@Value("${mainmanager.vendors}")
+	@Value("${mainmanager.vendors.usted}")
 	private String mainManagerVendors;
 
 	@Autowired
