@@ -37,7 +37,7 @@ public class ArtikkelInfo {
 
     private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
-    @Value("${mainmanager.artikkelinfo}")
+    @Value("${MM_ARTIKKELINFO}")
     private String mainManagerArtikkelInfo;
 
     @Autowired
