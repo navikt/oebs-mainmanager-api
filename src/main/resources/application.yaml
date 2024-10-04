@@ -65,4 +65,4 @@ logging:
     # root: DEBUG
     # org.springframework.web: debug
     # org.hibernate: error
-    # org.springframework: DEBUG
+    org.springframework: DEBUG
