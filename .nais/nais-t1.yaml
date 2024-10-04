@@ -36,9 +36,9 @@ spec:
   envFrom:
     - secret: main-manager
 
-  #prometheus:
-    #enabled: true
-    #path: /actuator/prometheus
+  prometheus:
+    enabled: true
+    path: /actuator/prometheus
 
   ingresses:
      - "https://oebs-mainmanager-api-t1.intern.dev.nav.no"

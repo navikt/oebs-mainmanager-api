@@ -4,12 +4,12 @@ server:
 
 spring:
   profiles:
-     active: t1
+     active: nais
   datasource:
     driver-class-name: oracle.jdbc.OracleDriver
-    username: appss #${APPS_USER}
-    password: test123 #${APPS_PASSWORD}
-    url: jdbc:oracle:thin:@d26dbfl027.test.local:1607:oebst1 #${DB_URL}
+    username: ${APPS_USER}
+    password: ${APPS_PASSWORD}
+    url: ${DB_URL}
   jpa:
     hibernate:
       ddl-auto: none
@@ -19,7 +19,7 @@ spring:
     show-sql: false
     open-in-view: false
   application:
-    name: oebs-mainmanager-api-t1 #${APP_NAME}
+    name: ${APP_NAME}
 
 oebs:
   environment: Oebst1
