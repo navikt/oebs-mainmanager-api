@@ -41,5 +41,5 @@ spec:
     path: /actuator/prometheus
 
   ingresses:
-     - "https://oebs-mainmanager-api-t1.intern.dev.nav.no"
-     - "https://oebs-mainmanager-api-t1.ekstern.dev.nav.no"
+     - "https://oebs-mainmanager-t1.intern.dev.nav.no"
+     - "https://oebs-mainmanager-t1.ekstern.dev.nav.no"
