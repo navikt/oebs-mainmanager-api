@@ -1,6 +1,6 @@
 package no.nav.oebs.api.controller;
 
-import antlr.Token;
+// import antlr.Token;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import no.nav.oebs.api.common.swagger.MainManagerSwagger;
