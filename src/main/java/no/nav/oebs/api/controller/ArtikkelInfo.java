@@ -4,7 +4,7 @@ import antlr.Token;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import no.nav.oebs.api.common.swagger.MainManagerSwagger;
-import no.nav.oebs.api.config.ProxyConfig;
+// import no.nav.oebs.api.config.ProxyConfig;
 import no.nav.oebs.api.service.ArtikkelInfoService;
 import no.nav.oebs.api.service.TokenService;
 import no.nav.security.token.support.core.api.Unprotected;
@@ -43,9 +43,6 @@ public class ArtikkelInfo {
     @Autowired
     private final TokenService tokenService;
 
-    @Autowired
-    ProxyConfig proxyConfig;
-
     private final ArtikkelInfoService artikkelInfoService;
 
     public ArtikkelInfo(TokenService tokenService, ArtikkelInfoService artikkelInfoService){
@@ -70,7 +67,7 @@ public class ArtikkelInfo {
 
         if (Objects.equals(TokenService.STATUS, "OK")) {
 
-            RestTemplate restTemplate = new RestTemplate((proxyConfig.requestFactory()));
+            RestTemplate restTemplate = new RestTemplate();
             HttpHeaders headers = new HttpHeaders();
 
             headers.setContentType(MediaType.APPLICATION_JSON);

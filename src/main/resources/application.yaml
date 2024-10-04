@@ -7,9 +7,9 @@ spring:
      active: t1
   datasource:
     driver-class-name: oracle.jdbc.OracleDriver
-    username: ${APPS_USER}
-    password: ${APPS_PASSWORD}
-    url: ${DB_URL}
+    username: appss #${APPS_USER}
+    password: test123 #${APPS_PASSWORD}
+    url: jdbc:oracle:thin:@d26dbfl027.test.local:1607:oebst1 #${DB_URL}
   jpa:
     hibernate:
       ddl-auto: none
@@ -19,7 +19,7 @@ spring:
     show-sql: false
     open-in-view: false
   application:
-    name: ${APP_NAME}
+    name: oebs-mainmanager-api-t1 #${APP_NAME}
 
 oebs:
   environment: Oebst1
@@ -62,7 +62,7 @@ springdoc:
 logging:
   level:
     com.zaxxer.hikari: DEBUG
-    root: DEBUG
-    org.springframework.web: debug
-    org.hibernate: error
-    org.springframework: DEBUG
+    # root: DEBUG
+    # org.springframework.web: debug
+    # org.hibernate: error
+    # org.springframework: DEBUG
