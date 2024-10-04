@@ -17,7 +17,7 @@
     </appender>
 
     <springProfile name="nais">
-        <root level="INFO">
+        <root>
             <appender-ref ref="stdout_json" />
         </root>
         <!--logger name="com.zaxxer.hikari.pool.HikariPool" level="TRACE"/-->
