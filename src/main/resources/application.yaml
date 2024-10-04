@@ -61,7 +61,7 @@ springdoc:
 
 logging:
   level:
-    com.zaxxer.hikari: DEBUG
+    #com.zaxxer.hikari: DEBUG
     # root: DEBUG
     # org.springframework.web: debug
     # org.hibernate: error
