@@ -40,12 +40,10 @@ spec:
     outbound:
       external:
         - host: nav-test.mainmanager.no
-        - host: a34duvw10783.devillo.no
 
     inbound:
       external:
         - host: nav-test.mainmanager.no
-        - host: a34duvw10783.devillo.no
 
   prometheus:
     enabled: true
