@@ -40,10 +40,15 @@ spec:
     outbound:
       external:
         - host: nav-test.mainmanager.no
+        - host: a34duvw10783.devillo.no
+        - ipv4: 10.52.64.43
+          ports:
+              - port: 1607
 
-    inbound:
-      external:
-        - host: nav-test.mainmanager.no
+    #inbound:
+      #external:
+        #- host: nav-test.mainmanager.no
+        #- host: a34duvw10783.devillo.no
 
   prometheus:
     enabled: true
