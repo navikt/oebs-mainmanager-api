@@ -47,7 +47,7 @@ spec:
 
     inbound:
       rules:
-        - application: '*' #nav-test.mainmanager.no
+        - application: '*'
 
   prometheus:
     enabled: true
