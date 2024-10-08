@@ -2,15 +2,13 @@
 server:
   port: 8080
 
-no:
-   nav:
-     security:
-       jwt:
-         issuer:
-           azure:
-             accepted_audience: ${AZURE_ACCEPTED_AUDIENCE}
-             discovery-url: ${AZURE_DISCOVERY_URL}
-             #proxyurl: ${AZURE_PROXY_URL}
+no.nav.security.jwt:
+   issuer:
+     azure:
+       accepted_audience: ${AZURE_ACCEPTED_AUDIENCE}
+       discovery-url: ${AZURE_DISCOVERY_URL}
+       proxyurl: ${AZURE_PROXY_URL}
+
 spring:
   profiles:
      active: nais
@@ -75,3 +73,7 @@ springdoc:
     # org.springframework.web: debug
     # org.hibernate: error
     # org.springframework: DEBUG
+
+logging.level:
+  org.springframework: INFO
+  no.nav: DEBUG
