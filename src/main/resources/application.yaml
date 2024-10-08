@@ -2,6 +2,15 @@
 server:
   port: 8080
 
+no:
+   nav:
+     security:
+       jwt:
+         issuer:
+           azure:
+             accepted_audience: ${AZURE_ACCEPTED_AUDIENCE}
+             discoveryurl: ${AZURE_DISCOVERY_URL}
+             proxyurl: ${AZURE_PROXY_URL}
 spring:
   profiles:
      active: nais
@@ -42,7 +51,7 @@ mainmanager:
   password: ${MM_PASSWORD}
   grant_type: ${MM_GRANT_TYPE}
 
-debug: true
+#debug: true
 
 
 management:
@@ -59,10 +68,10 @@ springdoc:
     disable-swagger-default-url: true
     tags-sorter: alpha
 
-logging:
-  level:
+#logging:
+  #level:
     #com.zaxxer.hikari: DEBUG
     # root: DEBUG
     # org.springframework.web: debug
     # org.hibernate: error
-    org.springframework: DEBUG
+    # org.springframework: DEBUG
