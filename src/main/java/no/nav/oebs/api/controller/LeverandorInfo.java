@@ -48,7 +48,7 @@ public class LeverandorInfo {
 		this.leverandorInfoService = serviceLev;
 	}
 
-	@Protected
+	/*@Protected
 	@PostMapping(path = "/leverandorsted_info")
 	@MainManagerSwagger
 	@Deprecated
@@ -93,8 +93,8 @@ public class LeverandorInfo {
 		logger.info("MainManager token feilet" );
 		return null;
 	}
-
-	@Unprotected
+*/
+	@Protected
 	@PostMapping(path = "/leverandorinfo")
 	@MainManagerSwagger
 	public String finnLeverandortransaksjoner(

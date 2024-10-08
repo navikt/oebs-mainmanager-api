@@ -7,6 +7,7 @@ import no.nav.oebs.api.common.swagger.MainManagerSwagger;
 // import no.nav.oebs.api.config.ProxyConfig;
 import no.nav.oebs.api.service.ArtikkelInfoService;
 import no.nav.oebs.api.service.TokenService;
+import no.nav.security.token.support.core.api.Protected;
 import no.nav.security.token.support.core.api.Unprotected;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -50,7 +51,7 @@ public class ArtikkelInfo {
         this.artikkelInfoService = artikkelInfoService;
     }
 
-    @Unprotected
+    @Protected
     @PostMapping(path = "/artikkelinfo")
     @MainManagerSwagger
     public String finnArtikkelInfoTransaksjoner(
