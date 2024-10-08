@@ -13,13 +13,13 @@ import org.springframework.context.annotation.Configuration;
 public class SwaggerConfig {
 	public static final String MAINMANAGER = "OeBS API";
 
-	@Value("${oebs.environment}")
+	@Value("${OEBS_ENV}")
 	String env;
 
-	@Value("${oebs.date}")
+	@Value("${APP_UPDATE}")
 	String dato;
 
-	@Value("${oebs.version}")
+	@Value("${APP_VERSION}")
 	String versjon;
 
 	public static final String BEARER_TOKEN_AUTH = "BearerToken";
