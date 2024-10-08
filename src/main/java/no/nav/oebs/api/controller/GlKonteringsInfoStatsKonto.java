@@ -28,7 +28,7 @@ public class GlKonteringsInfoStatsKonto {
 
     private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
-    @Value("${mainmanager.statsregnskapskonto}")
+    @Value("${MM_STATSREGNSKAPSKONTO}")
     private String mainManagerStatsKonto;
 
     @Autowired

@@ -34,9 +34,7 @@ public class LeverandorInfo {
 
 	private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
-	@Value("${mainmanager.vendors.sted}")
-	private String mainManagerVendorsSted;
-	@Value("${mainmanager.vendors.usted}")
+	@Value("${MM_VENDORS}")
 	private String mainManagerVendors;
 
 	@Autowired
@@ -48,52 +46,6 @@ public class LeverandorInfo {
 		this.leverandorInfoService = serviceLev;
 	}
 
-	/*@Protected
-	@PostMapping(path = "/leverandorsted_info")
-	@MainManagerSwagger
-	@Deprecated
-	public String finnLeverandortransaksjonerSted(
-			@RequestParam(name="org id", defaultValue = "202") Integer org_id,
-			@RequestParam(name="leverandornavn", required = false)
-				@Parameter(description = "f.eks. BOUVET ASA") String leverandornavn,
-			@RequestParam(name = "leverandornummer", required = false)
-				@Parameter(description = "f.eks. 7048") String leverandornummer,
-			@RequestParam(name = "leverandorsted", required = false)
-				@Parameter(description = "f.eks. NYDALEN") String leverandorsted,
-			@RequestParam(name = "lastupdatedate", defaultValue = "")
-				@Parameter(description = "f.eks. 2022-10-25")
-					@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate lastupdatedate) throws Exception {
-
-		String tokenet = tokenService.genererToken();
-
-		if (Objects.equals(TokenService.STATUS, "OK")) {
-
-			RestTemplate restTemplate = new RestTemplate();
-			HttpHeaders headers = new HttpHeaders();
-
-			headers.setContentType(MediaType.APPLICATION_JSON);
-			headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-			headers.setBearerAuth(tokenet);
-			// headers.set("Authorization", "Bearer " + tokenet);
-
-			String lev =  leverandorInfoService.finnLeverandorTransaksjoner(org_id, leverandornavn, leverandornummer, leverandorsted, lastupdatedate);
-			HttpEntity<String> entity = new HttpEntity<>(lev, headers);
-			ResponseEntity<String> response = restTemplate.postForEntity(mainManagerVendorsSted, entity, String.class);
-
-			if (response.getStatusCode() == HttpStatus.OK) {
-				logger.info("200 OK: {}", response.getBody());
-				return response.getBody();
-			} else {
-				logger.info("Response code:  {}", response.getStatusCode());
-				logger.info("Response body:  {}", response.getBody());
-				return response.getBody();
-			}
-		}
-
-		logger.info("MainManager token feilet" );
-		return null;
-	}
-*/
 	@Protected
 	@PostMapping(path = "/leverandorinfo")
 	@MainManagerSwagger

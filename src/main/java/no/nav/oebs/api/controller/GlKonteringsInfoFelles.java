@@ -28,7 +28,7 @@ public class GlKonteringsInfoFelles {
 
     private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
-    @Value("${mainmanager.felles}")
+    @Value("${MM_FELLES}")
     private String mainManagerFelles;
 
     @Autowired

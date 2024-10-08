@@ -30,7 +30,7 @@ public class GlKonteringsInfoKsted {
 
     private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
-    @Value("${mainmanager.kostnadssted}")
+    @Value("${MM_KOSTNADSSTED}")
     private String mainManagerKostnadssted;
 
     @Autowired

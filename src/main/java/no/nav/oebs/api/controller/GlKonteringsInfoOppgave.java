@@ -29,7 +29,7 @@ public class GlKonteringsInfoOppgave {
 
     private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
-    @Value("${mainmanager.oppgave}")
+    @Value("${MM_OPPGAVE}")
     private String mainManagerOppgave;
 
     @Autowired

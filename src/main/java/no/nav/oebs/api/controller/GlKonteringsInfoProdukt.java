@@ -27,7 +27,7 @@ public class GlKonteringsInfoProdukt {
 
     private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
-    @Value("${mainmanager.produkt}")
+    @Value("${MM_PRODUKT}")
     private String mainManagerProdukt;
 
     @Autowired

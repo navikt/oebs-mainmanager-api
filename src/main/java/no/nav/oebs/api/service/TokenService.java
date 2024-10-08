@@ -19,16 +19,16 @@ public class TokenService {
     public static String STATUS = "";
     private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
-    @Value("${mainmanager.username}")
+    @Value("${MM_USER}")
     private String mainManagerUserName;
 
-    @Value("${mainmanager.password}")
+    @Value("${MM_PASSWORD}")
     private String mainManagerPassword;
 
-    @Value("${mainmanager.grant_type}")
+    @Value("${MM_GRANT_TYPE}")
     private String mainManagerGrantType;
 
-    @Value("${mainmanager.url.token}")
+    @Value("${MM_URL_TOKEN}")
     private String mainManagerUrlToken;
 
     public String genererToken() throws Exception {

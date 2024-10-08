@@ -28,7 +28,7 @@ public class GlKonteringsInfoArtKonto {
 
     private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
-    @Value("${mainmanager.artskonto}")
+    @Value("${MM_ART}")
     private String mainManagerArtskonto;
 
     @Autowired
