@@ -9,7 +9,7 @@ no:
          issuer:
            azure:
              accepted_audience: ${AZURE_ACCEPTED_AUDIENCE}
-             discoveryurl: ${AZURE_DISCOVERY_URL}
+             discovery-url: ${AZURE_DISCOVERY_URL}
              #proxyurl: ${AZURE_PROXY_URL}
 spring:
   profiles:
