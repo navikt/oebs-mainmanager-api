@@ -45,9 +45,9 @@ spec:
           ports:
               - port: 1607
 
-    #inbound:
-      #rules:
-        #- application: '*'
+    inbound:
+      rules:
+        - application: nav-test.mainmanager.no
 
   prometheus:
     enabled: true

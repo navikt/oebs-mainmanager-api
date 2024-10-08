@@ -48,7 +48,7 @@ public class LeverandorInfo {
 		this.leverandorInfoService = serviceLev;
 	}
 
-	@Unprotected
+	@Protected
 	@PostMapping(path = "/leverandorsted_info")
 	@MainManagerSwagger
 	@Deprecated
@@ -74,6 +74,7 @@ public class LeverandorInfo {
 			headers.setContentType(MediaType.APPLICATION_JSON);
 			headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
 			headers.setBearerAuth(tokenet);
+			// headers.set("Authorization", "Bearer " + tokenet);
 
 			String lev =  leverandorInfoService.finnLeverandorTransaksjoner(org_id, leverandornavn, leverandornummer, leverandorsted, lastupdatedate);
 			HttpEntity<String> entity = new HttpEntity<>(lev, headers);
