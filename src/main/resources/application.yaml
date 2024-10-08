@@ -7,7 +7,7 @@ no.nav.security.jwt:
      azure:
        accepted_audience: ${AZURE_ACCEPTED_AUDIENCE}
        discovery-url: ${AZURE_DISCOVERY_URL}
-       proxyurl: ${AZURE_PROXY_URL}
+       # proxyurl: ${AZURE_PROXY_URL}
 
 spring:
   profiles:
