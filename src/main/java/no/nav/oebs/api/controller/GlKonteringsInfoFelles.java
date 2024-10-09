@@ -5,11 +5,9 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import no.nav.oebs.api.Application;
 import no.nav.oebs.api.common.swagger.MainManagerSwagger;
-import no.nav.oebs.api.config.ProxyConfig;
 import no.nav.oebs.api.config.SwaggerConfig;
 import no.nav.oebs.api.service.KonteringService;
-import no.nav.oebs.api.service.KonteringsInfoGLService;
-import no.nav.oebs.api.service.TokenService;
+import no.nav.security.token.support.core.api.Protected;
 import no.nav.security.token.support.core.api.Unprotected;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,13 +28,13 @@ public class GlKonteringsInfoFelles {
 
     private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
-    @Value("${mainmanager.felles}")
+    @Value("${MM_FELLES}")
     private String mainManagerFelles;
 
     @Autowired
     KonteringService konteringService;
 
-    @Unprotected
+    @Protected
     @PostMapping(path = "/gl_konteringsinfo_felles")
     @MainManagerSwagger
     //@SecurityRequirement(name = "basicAuth")

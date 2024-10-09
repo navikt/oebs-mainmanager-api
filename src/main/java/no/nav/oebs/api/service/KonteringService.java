@@ -1,7 +1,6 @@
 package no.nav.oebs.api.service;
 
 import no.nav.oebs.api.Application;
-import no.nav.oebs.api.config.ProxyConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +18,6 @@ public class KonteringService {
     private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
     @Autowired
-    ProxyConfig proxyConfig;
-
-    @Autowired
     KonteringsInfoGLService konteringsInfoGLService;
 
     @Autowired
@@ -36,9 +32,9 @@ public class KonteringService {
         try {
             if (Objects.equals(TokenService.STATUS, "OK")) {
 
-                RestTemplate restTemplate = new RestTemplate(proxyConfig.requestFactory());
+                //RestTemplate restTemplate = new RestTemplate(proxyConfig.requestFactory());
 
-                // RestTemplate restTemplate = new RestTemplate();
+                RestTemplate restTemplate = new RestTemplate();
 
                 HttpHeaders headers = new HttpHeaders();
 

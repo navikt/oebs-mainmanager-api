@@ -12,8 +12,7 @@ public class 	Application {
 	private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
 	public static void main(String[] args) {
-		// Props.setProps();
-
+		logger.info("Application started");
 		SpringApplication.run(Application.class, args);
 	}
 }
