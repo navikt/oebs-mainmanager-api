@@ -40,7 +40,6 @@ jobs:
 
   deploy-dev-t1:
     name: Deploy to NAIS Dev (T1)
-    needs: build-jar-docker
     if: startsWith(github.ref, 'refs/heads/dev/t1') # || github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     steps:
@@ -52,7 +51,6 @@ jobs:
 
   deploy-dev-q1:
     name: Deploy to NAIS dev (Q1)
-    needs: build-jar-docker
     if: startsWith(github.ref, 'refs/heads/dev/q1') # || github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     steps:
@@ -64,7 +62,7 @@ jobs:
 
   deploy-prod:
       name: Deploy to NAIS Prod
-      needs: build-jar-docker
+      # needs: build-jar-docker
       if: github.ref == 'refs/heads/main'
       runs-on: ubuntu-latest
       steps:
