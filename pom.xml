@@ -4,16 +4,16 @@
 
     <groupId>no.nav.oebs</groupId>
     <artifactId>oebs-mainmanager-api</artifactId>
-    <version>0.3.9</version>
+    <version>0.4.2</version>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.5</version>
+        <version>3.3.4</version>
         <relativePath/>
     </parent>
 
     <properties>
-        <java.version>18</java.version>
+        <java.version>21</java.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -22,11 +22,13 @@
         <surefire.coverage.argLine/>
 
         <!-- NAV artifacts -->
-        <token-validation.version>2.1.6</token-validation.version>
-        <logstash-logback-encoder.version>7.2</logstash-logback-encoder.version>
+        <token-validation.version>5.0.5</token-validation.version>
+        <logstash-logback-encoder.version>8.0</logstash-logback-encoder.version>
         <nimbus-jose-jwt.version>9.25.6</nimbus-jose-jwt.version>
-        <springdoc-openapi.version>1.6.12</springdoc-openapi.version>
+        <springdoc-openapi.version>1.8.0</springdoc-openapi.version>
         <sonar-maven-plugin.version>3.9.1.2184</sonar-maven-plugin.version>
+        <lombok-version>1.18.34</lombok-version>
+
     </properties>
 
     <dependencies>
@@ -86,7 +88,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.30</version>
+            <version>${lombok-version}</version>
             <scope>provided</scope>
         </dependency>
 

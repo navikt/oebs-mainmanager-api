@@ -4,22 +4,15 @@ metadata:
   name: oebs-mainmanager-api-q1
   namespace: team-oebs
   labels:
+    app: oebs-mainmanager-api-q1
     team: team-oebs
 spec:
-  image: repo.adeo.no:5443/oebs/oebs-mainmanager-api:0.2.7
+  image: {{ image }}
   port: 8080
   replicas:
     min: 1
     max: 1
-    cpuThresholdPercentage: 50
-  liveness:
-    path: /internal/isalive
-    initialDelay: 60
-    timeout: 11
-  readiness:
-    path: /internal/isready
-    initialDelay: 60
-    timeout: 10
+
   resources:
     requests:
       cpu: 400m
@@ -31,22 +24,23 @@ spec:
     application:
       enabled: true
       allowAllUsers: true
-      tenant: nav.no
-  #accessPolicy:
-  #  inbound:
-  #    rules:
-  #       - application: oebs-api-ve-q1
-  #         namespace: team-oebs
-  #         cluster: dev-fss
+      tenant: trygdeetaten.no
+  envFrom:
+    - secret: main-manager-q1
+
+  accessPolicy:
+    outbound:
+      external:
+        - host: nav-qa.mainmanager.no
+        - host: a34duvw10783.devillo.no
+        - ipv4: 10.53.136.176
+          ports:
+            - port: 1609
 
   prometheus:
     enabled: true
     path: /actuator/prometheus
-  vault:
-    enabled: true
-    paths:
-      - kvPath: "kv/preprod/fss/oebs-mainmanager-api-q1/team-oebs"
-        mountPath: "/var/run/secrets/nais.io/vault"
 
   ingresses:
-     - "https://oebs-mainmanager-api-q1.dev.intern.nav.no"
+    - "https://oebs-mainmanager-api-q1.intern.dev.nav.no"
+    - "https://oebs-mainmanager-api-q1.ekstern.dev.nav.no"
