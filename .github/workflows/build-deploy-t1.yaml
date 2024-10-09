@@ -4,11 +4,17 @@ on:
     branches:
       - 'dev/**'
       - 'main'
+
+permissions:
+  contents: read
+  packages: write
+  id-token: write
+
 jobs:
   build_and_push:
-    permissions:
-      contents: "read"
-      id-token: "write"
+    #permissions:
+    #  contents: "read"
+    #  id-token: "write"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
