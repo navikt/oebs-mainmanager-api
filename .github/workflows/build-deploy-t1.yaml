@@ -60,6 +60,7 @@ jobs:
     if: startsWith(github.ref, 'refs/heads/dev/q1') # || github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - uses: nais/deploy/actions/deploy@v2
         env:
           CLUSTER: dev-gcp
