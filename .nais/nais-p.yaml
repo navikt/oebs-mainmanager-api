@@ -5,7 +5,7 @@ metadata:
   name: oebs-mainmanager-api
   namespace: team-oebs
   labels:
-    app: oebs-mainmanager-api-q1
+    app: oebs-mainmanager-api
     team: team-oebs
 
 spec:
