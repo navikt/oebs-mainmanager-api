@@ -22,13 +22,13 @@
         </root>
         <!--logger name="com.zaxxer.hikari.pool.HikariPool" level="TRACE"/-->
         <!--logger name="no.nav.oebs.api" level="DEBUG" /-->
-        <!--logger name="logging.level.org.hibernate" level="DEBUG" /-->
+        <logger name="logging.level.org.hibernate" level="DEBUG" />
     </springProfile>
 
     <springProfile name="local">
         <include resource="org/springframework/boot/logging/logback/base.xml" />
         <!-- logger name="com.zaxxer.hikari.pool.HikariPool" level="TRACE"/ -->
-        <logger name="no.nav.oebs.api" level="DEBUG" />
+        <!--logger name="no.nav.oebs.api" level="DEBUG" / -->
         <!--logger name="logging.level.org.hibernate" level="DEBUG" / -->
     </springProfile>
 </configuration>

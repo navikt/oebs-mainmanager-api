@@ -1,7 +1,7 @@
 package no.nav.oebs.api.controller;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
-import javax.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.extern.slf4j.Slf4j;
 import no.nav.oebs.api.Application;
 import no.nav.oebs.api.common.swagger.MainManagerSwagger;

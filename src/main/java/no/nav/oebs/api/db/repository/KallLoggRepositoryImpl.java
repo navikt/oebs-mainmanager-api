@@ -1,7 +1,7 @@
 package no.nav.oebs.api.db.repository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 
 import lombok.extern.slf4j.Slf4j;
 import no.nav.oebs.api.db.entity.KallLogg;
@@ -19,7 +19,7 @@ public class KallLoggRepositoryImpl implements KallLoggRepositoryCustom {
 	@Override
 	public void pingKallLogg() {
 		log.info("Ping database kall logg");
-		List<KallLogg> resultList = entityManager.createQuery("SELECT k FROM KallLogg k WHERE kall_logg_id = 0", KallLogg.class) //
+		List<KallLogg> resultList = entityManager.createQuery("SELECT k FROM KallLogg k WHERE k.id = 0", KallLogg.class) //
 				.getResultList();
 		log.info("Ping database kall logg OK: " + resultList);
 	}
