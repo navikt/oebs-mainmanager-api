@@ -12,15 +12,7 @@ spec:
   replicas:
     min: 1
     max: 1
-    #cpuThresholdPercentage: 50
-  #liveness:
-    #path: /internal/isalive
-    #initialDelay: 60
-    #timeout: 10
-  #readiness:
-    #path: /internal/isready
-    #initialDelay: 60
-    #timeout: 10
+
   resources:
     requests:
       cpu: 400m
@@ -44,10 +36,6 @@ spec:
         - ipv4: 10.52.64.43
           ports:
               - port: 1607
-
-    #inbound:
-    #  rules:
-    #    - application: nav-test.mainmanager.no
 
   prometheus:
     enabled: true

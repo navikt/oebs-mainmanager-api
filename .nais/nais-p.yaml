@@ -1,25 +1,20 @@
 apiVersion: nais.io/v1alpha1
 kind: Application
+
 metadata:
   name: oebs-mainmanager-api
   namespace: team-oebs
   labels:
+    app: oebs-mainmanager-api
     team: team-oebs
+
 spec:
-  image: repo.adeo.no:5443/oebs/oebs-mainmanager-api:0.0.0
+  image: {{ image }}
   port: 8080
   replicas:
     min: 3
     max: 3
-    cpuThresholdPercentage: 50
-  liveness:
-    path: /internal/isalive
-    initialDelay: 60
-    timeout: 10
-  readiness:
-    path: /internal/isready
-    initialDelay: 60
-    timeout: 20
+
   resources:
     requests:
       cpu: 400m
@@ -27,30 +22,28 @@ spec:
     limits:
       cpu: 4000m
       memory: 2048Mi
+
   azure:
     application:
       enabled: true
       allowAllUsers: true
+      tenant: nav.no
+  envFrom:
+    - secret: main-manager
+
   accessPolicy:
-    inbound:
-      rules:
-         - application: oebs-api-ve
-           namespace: team-oebs
-           cluster: prod-fss
     outbound:
       external:
-        - host: nav.eye-share.com
-        - host: nav.controller.no
-        - host: controller-api-prod.developer.azure-api.net
+        - host: nav.mainmanager.no
+        - host: a34duvw10783.devillo.no
+        - ipv4: 10.53.136.157
+          ports:
+            - port: 1551
 
   prometheus:
     enabled: true
     path: /actuator/prometheus
-  vault:
-    enabled: true
-    paths:
-      - kvPath: "kv/prod/fss/oebs-mainmanager-api/team-oebs"
-        mountPath: "/var/run/secrets/nais.io/vault"
 
   ingresses:
-     - "https://oebs-mainmanager-api.intern.nav.no"
+    - "https://oebs-mainmanager.nav.no"
+    - "https://oebs-mainmanager.nav.no"

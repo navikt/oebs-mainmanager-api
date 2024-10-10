@@ -2,7 +2,8 @@ name: Build and push and deploy
 on:
   push:
     branches:
-      - dev/q1-oebs-mainmanager-api
+      - 'dev/**'
+      - 'main'
 jobs:
   build_and_push:
     permissions:
@@ -38,7 +39,7 @@ jobs:
           salsa: true
 
       - name: Deploy to NAIS (T1)
-        if: startsWith(github.ref, 'refs/heads/dev/t1') # || github.ref == 'refs/heads/master'
+        if: startsWith(github.ref, 'refs/heads/dev/t1')  || github.ref == 'refs/heads/main'
         uses: nais/deploy/actions/deploy@v2
         env:
           CLUSTER: dev-gcp
@@ -46,9 +47,17 @@ jobs:
           IMAGE: ${{ steps.docker-push.outputs.image }}
 
       - name: Deploy to NAIS (Q1)
-        if: startsWith(github.ref, 'refs/heads/dev/q1') # || github.ref == 'refs/heads/master'
+        if: startsWith(github.ref, 'refs/heads/dev/q1')  || github.ref == 'refs/heads/main'
         uses: nais/deploy/actions/deploy@v2
         env:
           CLUSTER: dev-gcp
           RESOURCE: .nais/nais-q1.yaml
+          IMAGE: ${{ steps.docker-push.outputs.image }}
+
+      - name: Deploy to NAIS produksjon
+        if: startsWith(github.ref, 'refs/heads/main')
+        uses: nais/deploy/actions/deploy@v2
+        env:
+          CLUSTER: prod-gcp
+          RESOURCE: .nais/nais-p.yaml
           IMAGE: ${{ steps.docker-push.outputs.image }}
