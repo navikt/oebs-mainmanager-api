@@ -2,7 +2,8 @@ name: Build and push and deploy
 on:
   push:
     branches:
-      - dev/q1-oebs-mainmanager-api
+      - 'dev/**'
+      - 'main'
 jobs:
   build_and_push:
     permissions:
@@ -51,4 +52,12 @@ jobs:
         env:
           CLUSTER: dev-gcp
           RESOURCE: .nais/nais-q1.yaml
+          IMAGE: ${{ steps.docker-push.outputs.image }}
+
+      - name: Deploy to NAIS produksjon
+        if: startsWith(github.ref, 'refs/heads/main') || github.ref == 'refs/heads/master'
+        uses: nais/deploy/actions/deploy@v2
+        env:
+          CLUSTER: prod-gcp
+          RESOURCE: .nais/nais-p.yaml
           IMAGE: ${{ steps.docker-push.outputs.image }}
