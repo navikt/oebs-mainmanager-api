@@ -46,4 +46,4 @@ spec:
 
   ingresses:
     - "https://oebs-mainmanager.nav.no"
-    - "https://oebs-mainmanager.nav.no"
+    - "https://oebs-mainmanager.intern.nav.no"
