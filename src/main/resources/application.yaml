@@ -22,7 +22,7 @@ spring:
     #properties:
     #  hibernate:
     #    dialect: org.hibernate.dialect.Oracle12cDialect
-    database-platform: org.hibernate.dialect.OracleDialect
+    # database-platform: org.hibernate.dialect.OracleDialect
     show-sql: false
     open-in-view: false
   application:
