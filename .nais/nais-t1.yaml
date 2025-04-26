@@ -6,6 +6,7 @@ metadata:
   labels:
     app: oebs-mainmanager-api-t1
     team: team-oebs
+
 spec:
   image: {{ image }}
   port: 8080
