@@ -35,7 +35,7 @@ spec:
         - host: a34duvw10783.devillo.no
         - ipv4: 10.53.136.176
           ports:
-            - port: 1609
+            - port: 1606
 
   prometheus:
     enabled: true
