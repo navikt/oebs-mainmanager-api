@@ -81,11 +81,11 @@ public class ArtikkelInfo {
             ResponseEntity<String> response = restTemplate.postForEntity(mainManagerArtikkelInfo, entity, String.class);
 
             if(response.getStatusCode() == HttpStatus.OK) {
-                logger.info("200 OK: {}", response.getBody());
+                // logger.info("200 OK: {}", response.getBody());
                 return response.getBody();
             } else {
                 logger.info("Response code:  {}", response.getStatusCode());
-                logger.info("Response body:  {}", response.getBody());
+                // logger.info("Response body:  {}", response.getBody());
                 return response.getBody();
             }
         }
