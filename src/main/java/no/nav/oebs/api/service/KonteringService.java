@@ -49,7 +49,7 @@ public class KonteringService {
                 ResponseEntity<String> response = restTemplate.exchange(mainManagerUrl, HttpMethod.POST, entity, String.class);
 
                 if (response.getStatusCode() == HttpStatus.OK) {
-                    logger.info("200 OK: {}", response.getBody());
+                    // logger.info("200 OK: {}", response.getBody());
                     return response.getBody();
                 } else {
                     logger.info("{}", response.getStatusCode());
