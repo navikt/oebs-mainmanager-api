@@ -15,11 +15,11 @@ spec:
 
   resources:
     requests:
-      cpu: 400m
-      memory: 1024Mi
+      cpu: 10m
+      memory: 448Mi
     limits:
-      cpu: 4000m
-      memory: 2048Mi
+     # cpu: 4000m
+      memory: 512Mi
   azure:
     application:
       enabled: true
