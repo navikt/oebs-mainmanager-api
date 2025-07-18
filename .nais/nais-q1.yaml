@@ -33,9 +33,9 @@ spec:
       external:
         - host: nav-qa.mainmanager.no
         - host: a34duvw10783.devillo.no
-        - ipv4: 10.53.136.176
+        - ipv4: 10.53.136.150
           ports:
-            - port: 1606
+            - port: 1609
 
   prometheus:
     enabled: true
