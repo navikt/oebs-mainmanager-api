@@ -31,7 +31,7 @@ spec:
   accessPolicy:
     outbound:
       external:
-        - host: dmv08db01.adeo.no
+        - host: 10.53.161.78  #dmv08db01.adeo.no
           ports:
             - port: 1521
             - port: 1606
