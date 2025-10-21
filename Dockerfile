@@ -2,13 +2,20 @@
 # FROM eclipse-temurin:21-jdk
 
 # Stage 1: Build your Java application
+# Use the correct tag for the JDK image
 FROM eclipse-temurin:21-jdk AS build
 
-# Install network utilities for debugging during the build process
-RUN apt-get update && apt-get install -y iproute2 iputils-ping telnet
+# Use curl, bash, etc., during the build process
+# ...
 
-FROM eclipse-temurin:21-jre-bookworm AS runtime
+# Set up your build environment
+WORKDIR /app
+COPY . .
+RUN ./mvn package # Or mvn package, etc.
 
+# Stage 2: Create the final, lean production image
+# Use the minimal JRE-only image with the correct tag
+FROM eclipse-temurin:21-jre AS runtime
 WORKDIR /app
 
 ENV LANG='nb_NO.UTF-8' LANGUAGE='nb_NO:nb' LC_ALL='nb:NO.UTF-8' TZ="Europe/Oslo"
