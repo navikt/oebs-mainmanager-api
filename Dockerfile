@@ -7,7 +7,7 @@ FROM eclipse-temurin:21-jdk AS build
 # Install network utilities for debugging during the build process
 RUN apt-get update && apt-get install -y iproute2 iputils-ping telnet
 
-FROM eclipse-temurin:21-jre-bookworm-slim AS runtime
+FROM eclipse-temurin:21-jre-bookworm AS runtime
 
 WORKDIR /app
 
