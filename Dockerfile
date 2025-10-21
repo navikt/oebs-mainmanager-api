@@ -1,6 +1,6 @@
 # FROM gcr.io/distroless/java21
 
-FROM eclipse-temurin:21-jdk-bookworm
+FROM eclipse-temurin:21-jdk
 
 WORKDIR /app
 
