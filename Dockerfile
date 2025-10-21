@@ -1,11 +1,6 @@
 # FROM gcr.io/distroless/java21
 
-FROM alpine:latest
-
-RUN apk update && \
-    apk add --no-cache bash curl
-
-# Your application code and further instructions here
+FROM eclipse-temurin:21-jdk-bookworm
 
 WORKDIR /app
 
