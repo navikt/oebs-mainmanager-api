@@ -31,7 +31,11 @@ spec:
   accessPolicy:
     outbound:
       external:
-        - host: 10.53.161.78  #dmv08db01.adeo.no
+        - host: dmv08db01.adeo.no
+          ports:
+            - port: 1521
+            - port: 1606
+        - ipv4: 10.53.161.78
           ports:
             - port: 1521
             - port: 1606
@@ -44,7 +48,7 @@ spec:
         - ipv4: 10.53.136.150
           ports:
             - port: 1609
-        - host: dmv08-scan
+        - host: dmv08-scan.adeo.no #10.53.161.77
           ports:
             - port: 1521
 
