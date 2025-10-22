@@ -31,18 +31,6 @@ spec:
   accessPolicy:
     outbound:
       external:
-        - host: dmv08db01.adeo.no
-          ports:
-            - port: 1521
-            - port: 1606
-        - ipv4: 10.53.161.78
-          ports:
-            - port: 1521
-            - port: 1606
-        - host: dmv08db02.adeo.no
-          ports:
-            - port: 1521
-            - port: 1606
         - host: nav-qa.mainmanager.no
         - host: a34duvw10783.devillo.no
         - ipv4: 10.53.136.150
@@ -51,7 +39,15 @@ spec:
         - host: dmv08-scan.adeo.no #10.53.161.77
           ports:
             - port: 1521
-
+        - ipv4: 10.53.161.75
+          ports:
+            - port: 1521
+        - ipv4: 10.53.161.76
+          ports:
+            - port: 1521
+        - ipv4: 10.53.161.77
+          ports:
+            - port: 1521
   prometheus:
     enabled: true
     path: /actuator/prometheus
