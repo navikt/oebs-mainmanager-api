@@ -39,13 +39,10 @@ spec:
         - host: dmv08-scan.adeo.no #10.53.161.77
           ports:
             - port: 1521
-        - ipv4: 10.53.161.75
+        - host: dmv02-scan.adeo.no #10.53.161.77
           ports:
             - port: 1521
-        - ipv4: 10.53.161.76
-          ports:
-            - port: 1521
-        - ipv4: 10.53.161.77
+        - host: dmv31-scan.adeo.no #10.53.161.77
           ports:
             - port: 1521
   prometheus:
