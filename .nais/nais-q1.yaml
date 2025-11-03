@@ -63,12 +63,7 @@ spec:
         - host: dmv08-scan.adeo.no
           ports:
             - port: 1521
-        - host: dmv02-scan.adeo.no
-          ports:
-            - port: 1521
-        - host: dmv31-scan.adeo.no
-          ports:
-            - port: 1521
+
   prometheus:
     enabled: true
     path: /actuator/prometheus
