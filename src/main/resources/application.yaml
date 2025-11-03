@@ -10,6 +10,9 @@ no.nav.security.jwt:
 
 # Add these if needed for SSL
 
+  spring.jpa.properties.hibernate.temp.use_jdbc_metadata_defaults=false
+  spring.jpa.show-sql=false
+
 spring:
   profiles:
      active: nais
@@ -34,8 +37,9 @@ spring:
       ddl-auto: none
     properties:
       hibernate:
+        temp:
+        use__jdbc_metadata_defaults: false
         dialect: org.hibernate.dialect.OracleDialect
-      # database-platform: org.hibernate.dialect.OracleDialect
     show-sql: false
     open-in-view: false
   application:
@@ -58,7 +62,7 @@ springdoc:
 logging:
   level:
      org:
-       hibernate: WARN
+       hibernate: ERROR
     #com.zaxxer.hikari: DEBUG
     # root: DEBUG
     # org.springframework.web: debug
