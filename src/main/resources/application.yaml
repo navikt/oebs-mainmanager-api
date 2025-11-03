@@ -8,10 +8,25 @@ no.nav.security.jwt:
        accepted_audience: ${AZURE_ACCEPTED_AUDIENCE}
        discovery-url: ${AZURE_DISCOVERY_URL}
 
+# Add these if needed for SSL
+  spring.datasource.hikari.data-source-properties=oracle.net.ssl_version=1.2
+  spring.datasource.hikari.data-source-properties=oracle.net.ssl_server_dn_match=true
+
 spring:
   profiles:
      active: nais
   datasource:
+
+    hikari:
+      data-source-properties:
+        oracle:
+          net:
+            ssl_version: 1.2
+            ssl_server_dn_match: true
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+
     driver-class-name: oracle.jdbc.OracleDriver
     username: ${APPS_USER}
     password: ${APPS_PASSWORD}
