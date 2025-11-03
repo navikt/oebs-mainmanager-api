@@ -37,11 +37,11 @@ spec:
           ports:
             - port: 1609
 
-        - ipv4: 10.53.161.81
-        - ipv4: 10.53.161.80
-        - ipv4: 10.53.161.75
-        - ipv4: 10.53.161.76
-        - ipv4: 10.53.161.77
+        - host: dmv08db02-vip.adeo.no
+        - host: dmv08db02.adeo.no
+        - host: dmv08db01.adeo.no
+        - host: dmv08db01-vip.adeo.no
+
         - host: dmv08-scan.adeo.no
           ports:
             - port: 1521
