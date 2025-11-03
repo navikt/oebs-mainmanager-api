@@ -37,9 +37,24 @@ spec:
           ports:
             - port: 1609
 
+        - ipv4: 10.53.161.78
+          ports:
+            - port: 1521
+        - ipv4: : 10.53.161.79
+          ports:
+            - port: 1521
+        - ipv4: : 10.53.161.7
+          ports:
+            - port: 1521
+        - iptv: 10.53.161.81
+          ports:
+            - port: 1521
+        - iptv: 10.53.161.80
+          ports:
+            - port: 1521
         - ipv4: 10.53.161.75
           ports:
-          - port: 1521
+            - port: 1521
         - ipv4: 10.53.161.76
           ports:
             - port: 1521
