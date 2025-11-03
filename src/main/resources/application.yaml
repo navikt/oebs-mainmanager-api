@@ -58,8 +58,12 @@ springdoc:
 
 logging:
   level:
-     org:
+    oracle:
+      jdbc: WARN
+      net: WARN
+    org:
        hibernate: ERROR
+
     #com.zaxxer.hikari: DEBUG
     # root: DEBUG
     # org.springframework.web: debug
