@@ -10,9 +10,6 @@ no.nav.security.jwt:
 
 # Add these if needed for SSL
 
-  spring.jpa.properties.hibernate.temp.use_jdbc_metadata_defaults=false
-  spring.jpa.show-sql=false
-
 spring:
   profiles:
      active: nais
