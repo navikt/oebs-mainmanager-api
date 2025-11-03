@@ -36,6 +36,16 @@ spec:
         - ipv4: 10.53.136.150
           ports:
             - port: 1609
+
+        - ipv4: 10.53.161.75
+          ports:
+          - port: 1521
+        - ipv4: 10.53.161.76
+          ports:
+            - port: 1521
+        - ipv4: 10.53.161.77
+          ports:
+            - port: 1521
         - host: dmv08-scan.adeo.no
           ports:
             - port: 1521
