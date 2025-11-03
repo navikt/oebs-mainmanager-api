@@ -9,8 +9,6 @@ no.nav.security.jwt:
        discovery-url: ${AZURE_DISCOVERY_URL}
 
 # Add these if needed for SSL
-  spring.datasource.hikari.data-source-properties=oracle.net.ssl_version=1.2
-  spring.datasource.hikari.data-source-properties=oracle.net.ssl_server_dn_match=true
 
 spring:
   profiles:
