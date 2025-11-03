@@ -60,6 +60,9 @@ spec:
           ports:
             - port: 1521
 
+        - host: dmv08-scan.adeo.no
+          ports:
+            - port: 1521
         - host: dmv02-scan.adeo.no
           ports:
             - port: 1521
