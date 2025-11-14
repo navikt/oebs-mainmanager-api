@@ -40,6 +40,33 @@ spec:
           ports:
             - port: 1551
 
+
+        - ipv4: 10.53.164.110  # dmv31db01.adeo.no
+          ports:
+            - port: 1521
+        - ipv4: 10.53.164.112  # dmv31db02.adeo.no
+          ports:
+            - port: 1521
+        - ipv4: 10.53.164.111  # dmv31db01-vip.adeo.no
+          ports:
+            - port: 1521
+        - ipv4: 10.53.164.113  # dmv31db02-vip.adeo.no
+          ports:
+            - port: 1521
+
+        - ipv4: 10.53.164.107  # dmv31-scan.adeo.no
+          ports:
+            - port: 1521
+        - ipv4: 10.53.164.108  # dmv31-scan.adeo.no
+          ports:
+            - port: 1521
+        - ipv4: 10.53.164.109  # dmv31-scan.adeo.no
+          ports:
+            - port: 1521
+
+        - host: dmv31-scan.adeo.no
+          ports:
+            - port: 1521
   prometheus:
     enabled: true
     path: /actuator/prometheus
