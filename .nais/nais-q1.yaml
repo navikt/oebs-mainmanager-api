@@ -36,15 +36,34 @@ spec:
         - ipv4: 10.53.136.150
           ports:
             - port: 1609
-        - host: dmv08-scan.adeo.no #10.53.161.77
+
+        - ipv4: 10.53.161.78  # dmv08db01.adeo.no
           ports:
             - port: 1521
-        - host: dmv02-scan.adeo.no #10.53.161.77
+        - ipv4: 10.53.161.80  # dmv08db02.adeo.no
           ports:
             - port: 1521
-        - host: dmv31-scan.adeo.no #10.53.161.77
+        - ipv4: 10.53.161.79  # dmv08db01-vip.adeo.no
           ports:
             - port: 1521
+        - ipv4: 10.53.161.81  # dmv08db02-vip.adeo.no
+          ports:
+            - port: 1521
+
+        - ipv4: 10.53.161.77  # dmv08-scan.adeo.no
+          ports:
+            - port: 1521
+        - ipv4: 10.53.161.76  # dmv08-scan.adeo.no
+          ports:
+            - port: 1521
+        - ipv4: 10.53.161.75  # dmv08-scan.adeo.no
+          ports:
+            - port: 1521
+
+        - host: dmv08-scan.adeo.no
+          ports:
+            - port: 1521
+
   prometheus:
     enabled: true
     path: /actuator/prometheus
