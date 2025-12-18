@@ -41,11 +41,11 @@ public class ArtikkelInfo {
     @Value("${MM_ARTIKKELINFO}")
     private String mainManagerArtikkelInfo;
 
+    @Autowired
     private final TokenService tokenService;
 
     private final ArtikkelInfoService artikkelInfoService;
 
-    @Autowired
     public ArtikkelInfo(TokenService tokenService, ArtikkelInfoService artikkelInfoService){
         this.tokenService = tokenService;
         this.artikkelInfoService = artikkelInfoService;
