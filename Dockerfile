@@ -7,4 +7,3 @@ COPY ${JAR_FILE} app.jar
 
 ENV TZ="Europe/Oslo"
 ENTRYPOINT ["java","-jar","app.jar"]
-
