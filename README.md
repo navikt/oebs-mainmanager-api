@@ -188,7 +188,7 @@ gcloud run deploy oebs-mainmanager-api \
 
 ### Deploy til Kubernetes
 
-Bruk `nais-p.yaml` for produksjon:
+Opprett `k8s-deployment.yaml`:
 
 ```yaml
 apiVersion: apps/v1
@@ -260,7 +260,7 @@ spec:
   type: LoadBalancer
 ```
 
-Deploy med: `kubectl apply -f nais-p.yaml`
+Deploy med: `kubectl apply -f k8s-deployment.yaml`
 
 ## Overvåking
 
@@ -268,15 +268,15 @@ Deploy med: `kubectl apply -f nais-p.yaml`
 
 ```bash
 # Liveness-probe
-curl https://oebs-mainmanager.nav.no/actuator/health
+curl http://localhost:8080/actuator/health
 
 # Readiness-probe
-curl https://oebs-mainmanager.nav.no/actuator/health/readiness
+curl http://localhost:8080/actuator/health/readiness
 ```
 
 ### Metrikker
 
-Prometheus-metrikker er tilgjengelig på `https://oebs-mainmanager.nav.no/actuator/prometheus`
+Prometheus-metrikker er tilgjengelig på `http://localhost:8080/actuator/prometheus`
 
 ### Logging
 
