@@ -85,10 +85,10 @@ spring.security.oauth2.resourceserver.jwt.jwk-set-uri=https://login.microsoftonl
 
 API-et er tilgjengelig på følgende URL-er etter oppstart:
 
-- **Swagger/OpenAPI-dokumentasjon**: `https://oebs-mainmanager.nav.no/swagger-ui/index.html#`
-- **API-dokumetasjon (JSON)**: `https://oebs-mainmanager.nav.no/v3/api-docs`
-- **Health-sjekk**: `https://oebs-mainmanager.nav.no/actuator/health`
-- **Prometheus-metrikker**: `https://oebs-mainmanager.nav.no/actuator/prometheus`
+- **Swagger/OpenAPI-dokumentasjon**: `http://localhost:8080/swagger-ui/index.html#`
+- **API-dokumetasjon (JSON)**: `http://localhost:8080/v3/api-docs`
+- **Health-sjekk**: `http://localhost:8080/actuator/health`
+- **Prometheus-metrikker**: `http://localhost:8080/actuator/prometheus`
 
 ## Docker
 
