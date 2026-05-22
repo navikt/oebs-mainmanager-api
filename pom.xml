@@ -24,9 +24,7 @@
         <!-- NAV artifacts -->
         <token-validation.version>5.0.5</token-validation.version>
         <logstash-logback-encoder.version>8.0</logstash-logback-encoder.version>
-        <nimbus-jose-jwt.version>9.25.6</nimbus-jose-jwt.version>
         <springdoc-openapi.version>1.8.0</springdoc-openapi.version>
-        <sonar-maven-plugin.version>3.9.1.2184</sonar-maven-plugin.version>
         <lombok-version>1.18.34</lombok-version>
 
     </properties>
@@ -104,12 +102,6 @@
             <artifactId>micrometer-registry-prometheus</artifactId>
         </dependency>
 
-        <!-- Swagger -->
-        <!--dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-ui</artifactId>
-            <version>${springdoc-openapi.version}</version>
-        </dependency -->
 
         <dependency>
             <groupId>no.nav.security</groupId>
@@ -162,12 +154,6 @@
                         <argLine>${surefire.argLine} ${surefire.coverage.argLine}</argLine>
                         <redirectTestOutputToFile>true</redirectTestOutputToFile>
                     </configuration>
-                </plugin>
-
-                <plugin>
-                    <groupId>org.sonarsource.scanner.maven</groupId>
-                    <artifactId>sonar-maven-plugin</artifactId>
-                    <version>${sonar-maven-plugin.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>
