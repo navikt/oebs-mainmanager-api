@@ -1,0 +1,64 @@
+
+server:
+  port: 8080
+
+spring:
+  profiles:
+     active: nais
+  datasource:
+
+    hikari:
+      data-source-properties:
+        oracle:
+          net:
+            ssl_version: 1.2
+            ssl_server_dn_match: true
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+
+    driver-class-name: oracle.jdbc.OracleDriver
+    username: username
+    password: password
+    url: jdbc:oracle:thin:@//localhost:1521/placeholder
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        temp:
+        use__jdbc_metadata_defaults: false
+        dialect: org.hibernate.dialect.OracleDialect
+    show-sql: false
+    open-in-view: false
+  application:
+    name: oebs-mainmanager-api
+
+mainmanager:
+  user: username
+  password: password
+  grant_type: grant_type
+  url_token: url_token
+  artikkelinfo: artikkelinfo
+  art: art
+  felles: felles
+  kostnadssted: koststed
+  product: product
+  statsregnskapskonto: statsregnskapskonto
+  vendors: vendors
+  oppgave: oppgave
+
+swagger:
+  oebs_env: mock
+  app_update: update1
+  app_version: version1
+
+
+springdoc:
+  packagesToScan: no.nav.oebs.api.controller
+  override-with-generic-response: false
+  remove-broken-reference-definitions: false
+  swagger-ui:
+    disable-swagger-default-url: true
+    tags-sorter: alpha
+

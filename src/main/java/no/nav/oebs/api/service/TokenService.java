@@ -2,9 +2,6 @@ package no.nav.oebs.api.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import no.nav.oebs.api.Application;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -17,18 +14,17 @@ import org.springframework.web.client.RestTemplate;
 public class TokenService {
 
     public static String STATUS = "";
-    private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
-    @Value("${MM_USER}")
+    @Value("${mainmanager.user}")
     private String mainManagerUserName;
 
-    @Value("${MM_PASSWORD}")
+    @Value("${mainmanager.password}")
     private String mainManagerPassword;
 
-    @Value("${MM_GRANT_TYPE}")
+    @Value("${mainmanager.grant_type}")
     private String mainManagerGrantType;
 
-    @Value("${MM_URL_TOKEN}")
+    @Value("${mainmanager.url_token}")
     private String mainManagerUrlToken;
 
     public String genererToken() throws Exception {
@@ -37,7 +33,6 @@ public class TokenService {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-        // headers.set("User-Agent", "Oebs-MainManger-api/0.0.4");
 
         MultiValueMap<String, String> requestBody = new LinkedMultiValueMap<>();
         requestBody.add("username", mainManagerUserName);

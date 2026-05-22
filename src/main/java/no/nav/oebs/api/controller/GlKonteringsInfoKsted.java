@@ -5,14 +5,10 @@ package no.nav.oebs.api.controller;
 
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import no.nav.oebs.api.Application;
 import no.nav.oebs.api.common.swagger.MainManagerSwagger;
 import no.nav.oebs.api.config.SwaggerConfig;
 import no.nav.oebs.api.service.KonteringService;
 import no.nav.security.token.support.core.api.Protected;
-import no.nav.security.token.support.core.api.Unprotected;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -25,12 +21,11 @@ import java.time.LocalDate;
 @RestController
 @Validated
 @RequestMapping(path = "/api/v1", produces = MediaType.APPLICATION_JSON_VALUE + ";charset=UTF-8")
-@Tag(name = SwaggerConfig.MAINMANAGER) //, description = "MAINMANAGER API")
+@Tag(name = SwaggerConfig.MAINMANAGER)
 public class GlKonteringsInfoKsted {
 
-    private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
-    @Value("${MM_KOSTNADSSTED}")
+    @Value("${mainmanager.kostnadssted}")
     private String mainManagerKostnadssted;
 
     @Autowired
@@ -39,7 +34,6 @@ public class GlKonteringsInfoKsted {
     @Protected
     @PostMapping(path = "/gl_konteringsinfo_kostnadssted")
     @MainManagerSwagger
-    //@SecurityRequirement(name = "basicAuth")
     public String glArtKontoTransaksjoner(
             @RequestParam(name = "org id", defaultValue = "202") Integer org_id,
             @RequestParam(name = "segmentverdi", required = false)

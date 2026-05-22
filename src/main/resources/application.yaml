@@ -42,6 +42,25 @@ spring:
   application:
     name: ${APP_NAME}
 
+mainmanager:
+  user: ${MM_USER}
+  password: ${MM_PASSWORD}
+  grant_type: ${MM_GRANT_TYPE}
+  url_token: ${MM_URL_TOKEN}
+  artikkelinfo: ${MM_ARTIKKELINFO}
+  art: ${MM_ART}
+  felles: ${MM_FELLES}
+  kostnadssted: ${MM_KOSTNADSSTED}
+  product: ${MM_PRODUCT}
+  statsregnskapskonto: ${MM_STATSREGNSKAPSKONTO}
+  vendors: ${MM_VENDORS}
+  oppgave: ${MM_OPPGAVE}
+
+swagger:
+  oebs_env: ${OEBS_ENV}
+  app_update: ${APP_UPDATE}
+  app_version: ${APP_VERSION}
+
 management:
   endpoints:
     web:
@@ -63,10 +82,3 @@ logging:
       net: WARN
     org:
        hibernate: ERROR
-
-    #com.zaxxer.hikari: DEBUG
-    # root: DEBUG
-    # org.springframework.web: debug
-    # org.hibernate: error
-    # org.springframework: DEBUG
-    # no.nav= DEBUG
