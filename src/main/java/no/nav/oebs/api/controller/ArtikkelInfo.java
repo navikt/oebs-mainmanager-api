@@ -1,18 +1,14 @@
 package no.nav.oebs.api.controller;
 
-// import antlr.Token;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import no.nav.oebs.api.common.swagger.MainManagerSwagger;
-// import no.nav.oebs.api.config.ProxyConfig;
 import no.nav.oebs.api.service.ArtikkelInfoService;
 import no.nav.oebs.api.service.TokenService;
 import no.nav.security.token.support.core.api.Protected;
-import no.nav.security.token.support.core.api.Unprotected;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import lombok.extern.slf4j.Slf4j;
-import no.nav.oebs.api.Application;
 import no.nav.oebs.api.config.SwaggerConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,9 +32,9 @@ import java.util.Objects;
 @Tag(name = SwaggerConfig.MAINMANAGER)
 public class ArtikkelInfo {
 
-    private static final Logger logger = LoggerFactory.getLogger(Application.class);
+    private static final Logger logger = LoggerFactory.getLogger(ArtikkelInfo.class);
 
-    @Value("${MM_ARTIKKELINFO}")
+    @Value("${mainmanager.artikkelinfo}")
     private String mainManagerArtikkelInfo;
 
     @Autowired
@@ -81,11 +77,9 @@ public class ArtikkelInfo {
             ResponseEntity<String> response = restTemplate.postForEntity(mainManagerArtikkelInfo, entity, String.class);
 
             if(response.getStatusCode() == HttpStatus.OK) {
-                // logger.info("200 OK: {}", response.getBody());
                 return response.getBody();
             } else {
                 logger.info("Response code:  {}", response.getStatusCode());
-                // logger.info("Response body:  {}", response.getBody());
                 return response.getBody();
             }
         }
