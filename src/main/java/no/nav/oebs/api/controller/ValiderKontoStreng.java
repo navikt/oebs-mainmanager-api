@@ -3,13 +3,9 @@ package no.nav.oebs.api.controller;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.extern.slf4j.Slf4j;
-import no.nav.oebs.api.Application;
 import no.nav.oebs.api.common.swagger.MainManagerSwagger;
 import no.nav.oebs.api.service.ValiderKontoStrengService;
 import no.nav.security.token.support.core.api.Protected;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import no.nav.oebs.api.config.SwaggerConfig;
 import org.springframework.http.*;
@@ -25,10 +21,8 @@ import io.swagger.v3.oas.annotations.Parameter;
 @RestController
 @Validated
 @RequestMapping(path = "/api/v1", produces = MediaType.APPLICATION_JSON_VALUE + ";charset=UTF-8")
-@Tag(name = SwaggerConfig.MAINMANAGER) //, description = "MAINMANAGER API")
+@Tag(name = SwaggerConfig.MAINMANAGER)
 public class ValiderKontoStreng {
-
-	private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
 	private ValiderKontoStrengService validerKontoStrengService;
 

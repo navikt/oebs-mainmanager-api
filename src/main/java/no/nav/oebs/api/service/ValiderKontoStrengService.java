@@ -19,7 +19,7 @@ public class ValiderKontoStrengService extends ObjektMaps {
 
 	private static final String PLSQL_PROCEDURE = "xxrtv_mainmanager_api_pkg.xxrtv_validerkontostreng_api";
 
-	private PlsqlProcedureRepository plsqlProcedureRepository;
+	private final PlsqlProcedureRepository plsqlProcedureRepository;
 
 	public ValiderKontoStrengService(PlsqlProcedureRepository plsqlProcedureRepository, ObjectMapper objectMapper) {
 		super(objectMapper);
