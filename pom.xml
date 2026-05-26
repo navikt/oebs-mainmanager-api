@@ -32,7 +32,7 @@
         <token-validation.version>5.0.5</token-validation.version>
         <logstash-logback-encoder.version>8.0</logstash-logback-encoder.version>
         <springdoc-openapi.version>1.8.0</springdoc-openapi.version>
-        <lombok-version>1.18.34</lombok-version>
+        <lombok-version>1.18.46</lombok-version>
 
     </properties>
 
