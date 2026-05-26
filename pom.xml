@@ -30,9 +30,9 @@
 
         <!-- NAV artifacts -->
         <token-validation.version>5.0.30</token-validation.version>
-        <logstash-logback-encoder.version>8.0</logstash-logback-encoder.version>
+        <logstash-logback-encoder.version>9.0</logstash-logback-encoder.version>
         <springdoc-openapi.version>1.8.0</springdoc-openapi.version>
-        <lombok-version>1.18.34</lombok-version>
+        <lombok-version>1.18.46</lombok-version>
 
     </properties>
 
@@ -126,7 +126,7 @@
         <dependency>
             <groupId>jakarta.validation</groupId>
             <artifactId>jakarta.validation-api</artifactId>
-            <version>3.1.0</version> <!-- Required for Spring Boot 3.x -->
+            <version>3.1.1</version> <!-- Required for Spring Boot 3.x -->
         </dependency>
 
         <dependency>
