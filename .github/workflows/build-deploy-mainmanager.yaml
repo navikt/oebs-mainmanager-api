@@ -58,7 +58,7 @@ jobs:
 
       - name: Deploy to NAIS (T1)
         if: startsWith(github.ref, 'refs/heads/dev/t1')  || github.ref == 'refs/heads/main'
-        uses: nais/deploy/actions/deploy@v2
+      - uses: nais/deploy/actions/deploy@0d5f4d6e5f9e6cc9af70906cbab768c13213e63f
         env:
           CLUSTER: dev-gcp
           RESOURCE: .nais/nais-t1.yaml
