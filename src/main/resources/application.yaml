@@ -51,7 +51,7 @@ mainmanager:
   art: ${MM_ART}
   felles: ${MM_FELLES}
   kostnadssted: ${MM_KOSTNADSSTED}
-  product: ${MM_PRODUCT}
+  product: ${MM_PRODUKT}
   statsregnskapskonto: ${MM_STATSREGNSKAPSKONTO}
   vendors: ${MM_VENDORS}
   oppgave: ${MM_OPPGAVE}
