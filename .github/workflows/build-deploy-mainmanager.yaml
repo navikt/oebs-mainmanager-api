@@ -2,8 +2,12 @@ name: Build and push and deploy
 on:
   push:
     branches:
-      - 'dev/**'
-      - 'main'
+      - dev/**
+      - main
+  pull_request:
+    branches:
+      - dev/**
+      - main
 jobs:
   build_and_push:
     permissions:
@@ -19,11 +23,25 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '21'
+          cache: maven
 
-      - name: Build with Maven
-        run: mvn clean install -DskipTests
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v5
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
 
-      - uses: nais/docker-build-push@v0
+      - name: Build and test
+        run: mvn --no-transfer-progress -B verify -Pcoverage
+
+      - name: Analyze with SonarCloud
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: mvn --no-transfer-progress -B org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Pcoverage
+
+      - uses: nais/docker-build-push@751a312f0803eb96a05a41fadf51be19b7be362c
         id: docker-push
         with:
           team: team-oebs # required
@@ -40,7 +58,7 @@ jobs:
 
       - name: Deploy to NAIS (T1)
         if: startsWith(github.ref, 'refs/heads/dev/t1')  || github.ref == 'refs/heads/main'
-        uses: nais/deploy/actions/deploy@v2
+        uses: nais/deploy/actions/deploy@a7f8690f9b367fcbf5348a0a1e21d44f1aae50eb
         env:
           CLUSTER: dev-gcp
           RESOURCE: .nais/nais-t1.yaml
@@ -48,7 +66,7 @@ jobs:
 
       - name: Deploy to NAIS (Q1)
         if: startsWith(github.ref, 'refs/heads/dev/q1')  || github.ref == 'refs/heads/main'
-        uses: nais/deploy/actions/deploy@v2
+        uses: nais/deploy/actions/deploy@a7f8690f9b367fcbf5348a0a1e21d44f1aae50eb
         env:
           CLUSTER: dev-gcp
           RESOURCE: .nais/nais-q1.yaml
@@ -56,7 +74,7 @@ jobs:
 
       - name: Deploy to NAIS produksjon
         if: startsWith(github.ref, 'refs/heads/main')
-        uses: nais/deploy/actions/deploy@v2
+        uses: nais/deploy/actions/deploy@a7f8690f9b367fcbf5348a0a1e21d44f1aae50eb
         env:
           CLUSTER: prod-gcp
           RESOURCE: .nais/nais-p.yaml

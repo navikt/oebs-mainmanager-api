@@ -29,12 +29,12 @@ import java.util.Objects;
 @RestController
 @Validated
 @RequestMapping(path = "/api/v1", produces = MediaType.APPLICATION_JSON_VALUE + ";charset=UTF-8")
-@Tag(name = SwaggerConfig.MAINMANAGER) //, description = "MAINMANAGER API")
+@Tag(name = SwaggerConfig.MAINMANAGER)
 public class LeverandorInfo {
 
-	private static final Logger logger = LoggerFactory.getLogger(Application.class);
+	private static final Logger logger = LoggerFactory.getLogger(LeverandorInfo.class);
 
-	@Value("${MM_VENDORS}")
+	@Value("${mainmanager.vendors}")
 	private String mainManagerVendors;
 
 	@Autowired
@@ -77,11 +77,9 @@ public class LeverandorInfo {
 			ResponseEntity<String> response = restTemplate.postForEntity(mainManagerVendors, entity, String.class);
 
 			if (response.getStatusCode() == HttpStatus.OK) {
-				// logger.info("200 OK: {}", response.getBody());
 				return response.getBody();
 			} else {
 				logger.info("Response code:  {}", response.getStatusCode());
-				// logger.info("Response body:  {}", response.getBody());
 				return response.getBody();
 			}
 		}
