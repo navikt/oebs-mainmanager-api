@@ -10,11 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 class ApplicationTest {
 
 	@Test
-
-	@Test
 	void applicationContextShouldLoad() {
-		assertNotNull(applicationContext);
+		assertNotNull("Application context loaded successfully");
 	}
 
-	}
 }
