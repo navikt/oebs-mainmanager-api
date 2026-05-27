@@ -1,0 +1,30 @@
+
+no.nav.security.jwt:
+  issuer:
+    azure:
+      accepted_audience: 1243
+      proxyurl:
+
+spring:
+  application:
+    name: oebs-mainmanager-api
+
+mainmanager:
+  user: username
+  password: password
+  grant_type: grant_type
+  url_token: url_token
+  artikkelinfo: artikkelinfo
+  art: art
+  felles: felles
+  kostnadssted: koststed
+  product: product
+  statsregnskapskonto: statsregnskapskonto
+  vendors: vendors
+  oppgave: oppgave
+
+swagger:
+  oebs_env: Manmanager
+  app_update: local
+  app_version: v1
+
