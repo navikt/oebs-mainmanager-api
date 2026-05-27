@@ -1,292 +1,115 @@
-# MainManager - Oebs Api
+# oebs-mainmanager-api
 
-REST API'er tilbudt av Oebs.
-
-## Beskrivelse
-
-OEBS MainManager API er en Spring Boot-basert REST API som fungerer som integrasjonsgrensesnitt mot Oracle E-Business Suite (EBS). APIet tilbyr følgende hovedfunksjoner:
-
-### Hovedfunksjoner
-
-- **Artikkelinformasjon**: Hent transaksjonsinformasjon for artikler basert på organisasjons-ID, artikkelnavn, artikkeltnummer og oppdateringsdato
-- **Kontostrenvalidering**: Valider komplekse kontostreneer med støtte for multiple kontodimensjoner (artskonto, koststed, produktoppgave, etc.)
-- **Kall-logging**: Automatisk logging av alle innkommende og utgående API-kall med full request/response-historikk
-- **OpenAPI/Swagger-dokumentasjon**: Interaktiv API-dokumentasjon tilgjengelig via web-grensesnitt
-
-### Teknologi
-
-- **Java 21** og Spring Boot 3.4.3
-- **JPA/Hibernate** for databasekommunikasjon
-- **Oracle Database** (JDBC driver)
-- **JWT-autentisering** via Azure AD
-- **Prometheus-metrikker** for overvåking
-- **Logstash-integrasjon** for log-aggregering og Kibana
-- **Jetty** som embedded web-container
-
-## Sikkerhet
-
-- API-et krever aksesstoken utstedt av Azure AD
-- JWT-tokens valideres automatisk på alle `/api/*`-endepunkter
-- Støtter både Bearer-token (OAuth 2.0) og Basic Authentication
-
-## Installasjon
-
-### Forutsetninger
-
-- Java 21 eller høyere
-- Maven 3.8+
-- Oracle Database-tilkobling (konfigureres via miljøvariabler)
-
-### Bygge prosjektet
-
-```bash
-# Klon repositoriet
-git clone https://github.com/navikt/oebs-mainmanager-api.git
-cd oebs-mainmanager-api
-
-# Bygg prosjektet
-mvn clean package
-```
-
-## Kjøring
-
-### Lokalt (utvikling)
-
-```bash
-# Start applikasjonen med spring-boot-maven-plugin
-mvn spring-boot:run -Dspring-boot.run.profiles=local
-
-# Eller kjør JAR-filen direkte
-java -jar target/oebs-mainmanager-api-0.4.6.jar
-```
-
-Applikasjonen starter på `http://localhost:8080` (eller den konfigurerte porten).
-
-### Miljøvariabler
-
-```bash
-# Påkrevd
-OEBS_ENV=DEV|TEST|PROD              # Miljø
-APP_VERSION=0.4.6                    # Applikasjonsversjon
-APP_UPDATE=2026-04-27                # Oppfriskningsdato
-
-# Database
-spring.datasource.url=jdbc:oracle:thin:@host:port:sid
-spring.datasource.username=oebsuser
-spring.datasource.password=password
-spring.jpa.database-platform=org.hibernate.dialect.OracleDialect
-
-# Azure AD (autentisering)
-spring.security.oauth2.resourceserver.jwt.issuer-uri=https://login.microsoftonline.com/{tenant}/v2.0
-spring.security.oauth2.resourceserver.jwt.jwk-set-uri=https://login.microsoftonline.com/{tenant}/discovery/v2.0/keys
-```
-
-### Endepunkter
-
-API-et er tilgjengelig på følgende URL-er etter oppstart:
-
-- **Swagger/OpenAPI-dokumentasjon**: `http://localhost:8080/swagger-ui/index.html#`
-- **API-dokumetasjon (JSON)**: `http://localhost:8080/v3/api-docs`
-- **Health-sjekk**: `http://localhost:8080/actuator/health`
-- **Prometheus-metrikker**: `http://localhost:8080/actuator/prometheus`
-
-## Docker
-
-### Bygge Docker-image
-
-```bash
-# Bygg JAR-filen først
-mvn clean package
-
-# Bygg Docker-image
-docker build -t navikt/oebs-mainmanager-api:latest .
-
-# Med spesifikk tag/versjon
-docker build -t navikt/oebs-mainmanager-api:0.4.6 .
-```
-
-### Kjøre Docker-container
-
-```bash
-# Basis-kjøring
-docker run -p 8080:8080 \
-  -e spring.datasource.url=jdbc:oracle:thin:@oracle-host:1521:OEBS \
-  -e spring.datasource.username=oebsuser \
-  -e spring.datasource.password=password \
-  -e OEBS_ENV=DEV \
-  navikt/oebs-mainmanager-api:latest
-
-# Med volumes for logging
-docker run -p 8080:8080 \
-  -v /var/log/oebs:/app/logs \
-  -e spring.datasource.url=jdbc:oracle:thin:@oracle-host:1521:OEBS \
-  -e spring.datasource.username=oebsuser \
-  -e spring.datasource.password=password \
-  -e OEBS_ENV=DEV \
-  navikt/oebs-mainmanager-api:latest
-```
-
-### Docker Compose (for lokal utvikling)
-
-Opprett `docker-compose.yml`:
-
-```yaml
-version: '3.8'
-
-services:
-  oebs-api:
-    build: .
-    ports:
-      - "8080:8080"
-    environment:
-      spring.datasource.url: jdbc:oracle:thin:@oracle-db:1521:OEBS
-      spring.datasource.username: oebsuser
-      spring.datasource.password: password
-      OEBS_ENV: DEV
-      APP_VERSION: 0.4.6
-      APP_UPDATE: 2026-04-27
-      TZ: Europe/Oslo
-    depends_on:
-      - oracle-db
-
-  oracle-db:
-    image: container-registry.oracle.com/database/enterprise:latest
-    environment:
-      ORACLE_PWD: password
-    volumes:
-      - oracle-data:/var/opt/oracle
-    ports:
-      - "1521:1521"
-
-volumes:
-  oracle-data:
-```
-
-Start med: `docker-compose up -d`
-
-## Deployment
-
-### Deploy til GCP Cloud Run
-
-```bash
-# Autentiser mot Google Cloud
-gcloud auth login
-
-# Bygge og push image
-gcloud builds submit --tag gcr.io/PROJECT_ID/oebs-mainmanager-api
-
-# Deploy til Cloud Run
-gcloud run deploy oebs-mainmanager-api \
-  --image gcr.io/PROJECT_ID/oebs-mainmanager-api \
-  --platform managed \
-  --region europe-north1 \
-  --memory 1Gi \
-  --cpu 1 \
-  --set-env-vars OEBS_ENV=PROD,APP_VERSION=0.4.6 \
-  --vpc-connector oracle-connector
-```
-
-### Deploy til Kubernetes
-
-Opprett `k8s-deployment.yaml`:
-
-```yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: oebs-mainmanager-api
-  labels:
-    app: oebs-mainmanager-api
-spec:
-  replicas: 2
-  selector:
-    matchLabels:
-      app: oebs-mainmanager-api
-  template:
-    metadata:
-      labels:
-        app: oebs-mainmanager-api
-    spec:
-      containers:
-      - name: api
-        image: navikt/oebs-mainmanager-api:0.4.6
-        ports:
-        - containerPort: 8080
-        env:
-        - name: OEBS_ENV
-          value: "PROD"
-        - name: APP_VERSION
-          value: "0.4.6"
-        - name: spring.datasource.url
-          valueFrom:
-            secretKeyRef:
-              name: oebs-db-config
-              key: url
-        - name: spring.datasource.username
-          valueFrom:
-            secretKeyRef:
-              name: oebs-db-config
-              key: username
-        - name: spring.datasource.password
-          valueFrom:
-            secretKeyRef:
-              name: oebs-db-config
-              key: password
-        livenessProbe:
-          httpGet:
-            path: /actuator/health
-            port: 8080
-          initialDelaySeconds: 30
-          periodSeconds: 10
-        readinessProbe:
-          httpGet:
-            path: /actuator/health/readiness
-            port: 8080
-          initialDelaySeconds: 10
-          periodSeconds: 5
+REST API service that integrates OEBS (Oracle E-Business Suite) with Mainmanager. Mainmanager is a system handling all properties NAV uses.
+The service exposes PL/SQL stored procedures from OEBS as REST endpoints, enabling querying and pushing data related to invoices, purchase orders, accounting entries, and supplier information.
 
 ---
-apiVersion: v1
-kind: Service
-metadata:
-  name: oebs-mainmanager-api
-spec:
-  selector:
-    app: oebs-mainmanager-api
-  ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 8080
-  type: LoadBalancer
-```
 
-Deploy med: `kubectl apply -f k8s-deployment.yaml`
+## Architecture
+![Service-illustration](docs/service-illustration.png)
 
-## Overvåking
+The service acts as a middleware between the external systems Mainmanager and the OEBS Oracle database.
+Vieri receives data from OEBS via POST endpoints, requested by a script on the application server triggered daily by OeBS.
+#todo: Finne ut hvem som trigger kallene mot OeBS. 
 
-### Health-sjekker
+---
 
-```bash
-# Liveness-probe
-curl http://localhost:8080/actuator/health
+## Functionality
 
-# Readiness-probe
-curl http://localhost:8080/actuator/health/readiness
-```
+### Instances and OEBS environments
+The service currently runs with three instances: t1, q1 and prod. 
 
-### Metrikker
+### OEBS PL/SQL procedures
+#todo: Oppdatere med riktige lenker og beskrivelse på hvordan den er integrert med OeBS
 
-Prometheus-metrikker er tilgjengelig på `http://localhost:8080/actuator/prometheus`
+Installation of the packages and log tables in OEBS used by this repository is handled by an [install script](https://github.com/navikt/oebs/blob/main/install/install_IFA_restapi_ve_v1.sh) in the OEBS repository.
 
-### Logging
+The [package specification](https://github.com/navikt/oebs/blob/main/admin/sql/xxrtv_oebs-restapi-ve-v1.pks) and [package body](https://github.com/navikt/oebs/blob/main/admin/sql/xxrtv_oebs-restapi-ve-v1.pkb) are also in the OEBS repository.
+The package specification contains the methods called by the services in this repository, and the package body contains their implementations.
 
-Alle API-kall logges automatisk til databasen (`XXRTV_MAINMANAGER_LOGG`-tabellen). Loggene inkluderer:
-- Korrelasjon-ID for sporing
-- Request/response-innhold
-- HTTP-statuskoder
-- Kalltider
-- Feilmeldinger
+---
 
-## Lisens
+## Dependencies
 
-MIT License
+| System                   | Purpose                                                            |
+|--------------------------|--------------------------------------------------------------------|
+| **OEBS Oracle Database** | Source of all business data; accessed via PL/SQL stored procedures |
+| **Mainmanager REST API** | #todo: finne ut hva som gjør her                                   |
+| **NAV Token Validation** | OAuth2/JWT security via Azure AD                                   |
+| **NAIS platform**        | Container orchestration, secrets management, and deployment        |
+
+---
+
+## Running Locally
+
+To run the service locally, use the `local` profile and set the following environment variables.
+Values for all secrets can be retrieved from the NAIS console for the application `oebs-mainmanager-api-t1`:
+
+- `APPS_USERNAME` – username for OEBS
+- `OAPPS_PASSWORD` – password for OEBS
+- `DB_URL` – URL for OEBS (change from t1 to u1 at the end)
+- `AZURE_DISCOVERY_URL` – discovery URL for the Azure AD app
+
+You must also have connectivity to oebsu1, which is located in the secure zone.
+You can either use **vdi-utvikler-oebs** (a VDI set up for development in the secure zone) or the **Global Secure Access Client**.
+For more information, see the [oksty developer documentation](https://github.com/navikt/oksty-documentation).
+
+[Swagger UI](http://localhost:8080/swagger-ui/index.html) is available when running locally,
+but all endpoints are protected by Entra ID by default. To test endpoints without authentication,
+replace the `@Protected` annotation in a controller with `@Unprotected`.
+
+---
+
+## Testing
+
+Unit tests are set up using JUnit and Mockito. No integration tests are currently configured.
+
+---
+
+## Monitoring and Alerting
+
+No alerting is currently configured. Issues must be detected by users experiencing errors when calling the API, or through observed problems in OEBS that can be traced back to the API.
+
+Standard application monitoring is available via Grafana dashboards:
+- [Grafana dashboard for t1](https://grafana.nav.cloud.nais.io/a/nais-apm-app/services/team-oebs/oebs-mainmanager-api-t1?namespace=team-oebs&environment=dev-gcp)
+- [Grafana dashboard for q1](https://grafana.nav.cloud.nais.io/a/nais-apm-app/services/team-oebs/oebs-mainmanager-api-q1?namespace=team-oebs&environment=dev-gcp)
+- [Grafana dashboard for prod](https://grafana.nav.cloud.nais.io/a/nais-apm-app/services/team-oebs/oebs-mainmanager-api?namespace=team-oebs&environment=prod-gcp)
+---
+
+## Deploy
+
+### Branching strategy
+- Feature development should happen on dedicated branches with a PR to `main`.
+- Merging to `main` triggers deployment to **all environments** (T1, Q1, and production).
+
+### Referencing Jira tasks
+Include the Jira task key in the branch name and/or commit message. All PRs are squash-merged into main, so the most important thing is that the Jira issue is referenced in the squash commit message and that the PR title references the Jira issue.
+For example, if working on `OEBS-123`, the commit message should include `feat(OEBS-123): new rest endpoint` and the PR title should follow the same format.
+If a PR covers multiple Jira issues, all should be referenced, e.g. `feat(OEBS-123, OEBS-124): new rest endpoint and tests`.
+All individual commits should be listed in the PR description.
+
+### Deployment pipeline
+Deployments are handled by GitHub Actions (`.github/workflows/build-deploy-mainmanager.yaml`).
+
+### Promotion criteria
+Before deploying to production:
+- All tests must pass (`mvn verify`).
+- SonarCloud analysis must not introduce new critical issues.
+
+---
+
+## Documentation
+
+### Swagger / OpenAPI
+Swagger UI is available when the application is running:
+
+- [Swagger t1](https://oebs-mainmanager-api-t1.intern.dev.nav.no/swagger-ui/index.html)
+- [Swagger q1](https://oebs-mainmanager-api-q1.intern.dev.nav.no/swagger-ui/index.html)
+- [Swagger prod](https://oebs-mainmanager.intern.nav.no/swagger-ui/index.html)
+
+### System documentation
+- [System documenation in Teams](https://navno.sharepoint.com/:u:/r/sites/VLTEAMOeBS200/Shared%20Documents/Systemdokumentasjon/MainManager/OeBS%20MD-050_070%20eyeshare,%20Vieri%20og%20Main%20Manager%20%E2%80%93%20Valider%20Kontostreng.docx.url?csf=1&web=1&e=IJQe2d)
+  (Restricted access)
+- [System illustration documented in Teams](https://navno.sharepoint.com/:w:/r/sites/VLTEAMOeBS200/Shared%20Documents/Systemdokumentasjon/MainManager/Mainmanager%20integrasjoner%20pr%2020012025.docx?d=w5f97dea1477f438bb45e86696bef7609&csf=1&web=1&e=8JCJk7)  (Restricted access)
+
+---
