@@ -1,16 +1,13 @@
 package no.nav.oebs.api.service;
 
 import lombok.extern.slf4j.Slf4j;
-
-
 import no.nav.oebs.api.common.utils.ObjektMaps;
 import no.nav.oebs.api.common.model.ValiderKontoStrengRequest;
 import no.nav.oebs.api.db.repository.PlsqlProcedureRepository;
 import no.nav.oebs.api.db.repository.PlsqlProcedureResult;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.databind.json.JsonMapper;
 
 @Slf4j
 @Service
@@ -21,7 +18,7 @@ public class ValiderKontoStrengService extends ObjektMaps {
 
 	private final PlsqlProcedureRepository plsqlProcedureRepository;
 
-	public ValiderKontoStrengService(PlsqlProcedureRepository plsqlProcedureRepository, ObjectMapper objectMapper) {
+	public ValiderKontoStrengService(PlsqlProcedureRepository plsqlProcedureRepository, JsonMapper objectMapper) {
 		super(objectMapper);
 		this.plsqlProcedureRepository = plsqlProcedureRepository;
 	}

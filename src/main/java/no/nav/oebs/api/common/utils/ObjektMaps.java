@@ -1,27 +1,23 @@
 package no.nav.oebs.api.common.utils;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import no.nav.oebs.api.db.repository.PlsqlMessageCodes;
 import no.nav.oebs.api.db.repository.PlsqlProcedureResult;
 import no.nav.oebs.api.exception.JsonMappingException;
 import no.nav.oebs.api.exception.TechnicalPlsqlException;
 import no.nav.oebs.api.exception.UgyldigInputException;
+import tools.jackson.core.JacksonException;
+import tools.jackson.databind.json.JsonMapper;
 
 /**
  * Superklasse med felles funksjonalitet for implementasjon av tjenestespesifikke Service-klasser.
  */
 public class ObjektMaps {
 
-	private ObjectMapper objectMapper;
+	private final JsonMapper jsonMapper;
 
-	protected ObjektMaps() {
-	}
-
-	protected ObjektMaps(ObjectMapper objectMapper) {
-		this.objectMapper = objectMapper;
+	protected ObjektMaps(JsonMapper jsonMapper) {
+		this.jsonMapper = jsonMapper;
 	}
 
 	/**
@@ -41,8 +37,8 @@ public class ObjektMaps {
 	 */
 	protected <T> String toJson(T object) {
 		try {
-			return objectMapper.writeValueAsString(object);
-		} catch (JsonProcessingException e) {
+			return jsonMapper.writeValueAsString(object);
+		} catch (JacksonException e) {
 			throw new JsonMappingException(e);
 		}
 	}
@@ -52,21 +48,10 @@ public class ObjektMaps {
 	 */
 	protected <T> T toObject(String json, Class<T> valueType) {
 		try {
-			return objectMapper.readValue(json, valueType);
-		} catch (JsonProcessingException e) {
+			return jsonMapper.readValue(json, valueType);
+		} catch (JacksonException e) {
 			throw new JsonMappingException(e);
 		}
 	}
 
-	/**
-	 * Mapper fra JSON- til Java-objekt der generisk typeinformasjon må brukes under mappingen. Dette gjelder typisk for List-
-	 * og Map-objekter.
-	 */
-	protected <T> T toObject(String json, TypeReference<T> objectTypeRef) {
-		try {
-			return objectMapper.readValue(json, objectTypeRef);
-		} catch (JsonProcessingException e) {
-			throw new JsonMappingException(e);
-		}
-	}
 }

@@ -8,7 +8,7 @@ import no.nav.oebs.api.db.repository.PlsqlProcedureRepository;
 import no.nav.oebs.api.db.repository.PlsqlProcedureResult;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.databind.json.JsonMapper;
 
 @Slf4j
 @Service
@@ -19,7 +19,7 @@ public class KonteringsInfoGLService extends ObjektMaps {
 
 	private final PlsqlProcedureRepository plsqlProcedureRepository;
 
-	public KonteringsInfoGLService(PlsqlProcedureRepository plsqlProcedureRepository, ObjectMapper objectMapper) {
+	public KonteringsInfoGLService(PlsqlProcedureRepository plsqlProcedureRepository, JsonMapper objectMapper) {
 		super(objectMapper);
 		this.plsqlProcedureRepository = plsqlProcedureRepository;
 	}

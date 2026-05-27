@@ -1,6 +1,5 @@
 package service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import no.nav.oebs.api.db.repository.PlsqlMessageCodes;
 import no.nav.oebs.api.db.repository.PlsqlProcedureRepository;
 import no.nav.oebs.api.db.repository.PlsqlProcedureResult;
@@ -20,6 +19,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.util.ReflectionTestUtils;
+import tools.jackson.databind.json.JsonMapper;
 
 import java.time.LocalDate;
 
@@ -38,7 +38,7 @@ class ServiceTest {
     private PlsqlProcedureRepository plsqlProcedureRepository;
 
     @Mock
-    private ObjectMapper jsonMapper;
+    private JsonMapper jsonMapper;
 
     private PlsqlProcedureResult resultWithData(String data) {
         return new PlsqlProcedureResult(data, PlsqlMessageCodes.OK, "OK");
