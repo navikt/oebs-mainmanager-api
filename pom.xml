@@ -28,11 +28,12 @@
         <surefire.argLine>-Dfile.encoding=UTF-8</surefire.argLine>
         <surefire.coverage.argLine/>
 
-        <!-- NAV artifacts -->
-        <token-validation.version>5.0.5</token-validation.version>
+        <token-validation.version>5.0.30</token-validation.version>
         <logstash-logback-encoder.version>9.0</logstash-logback-encoder.version>
-        <springdoc-openapi.version>1.8.0</springdoc-openapi.version>
+        <springdoc-openapi.version>2.6.0</springdoc-openapi.version>
         <lombok-version>1.18.46</lombok-version>
+        <jacoco.version>0.8.14</jacoco.version>
+        <jakarta-validation.version>3.1.1</jakarta-validation.version>
 
     </properties>
 
@@ -126,13 +127,13 @@
         <dependency>
             <groupId>jakarta.validation</groupId>
             <artifactId>jakarta.validation-api</artifactId>
-            <version>3.1.1</version> <!-- Required for Spring Boot 3.x -->
+            <version>${jakarta-validation.version}</version> <!-- Required for Spring Boot 3.x -->
         </dependency>
 
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-            <version>2.6.0</version>
+            <version>${springdoc-openapi.version}</version>
         </dependency>
 
         <!-- Test dependencies -->
@@ -189,7 +190,7 @@
                     <plugin>
                         <groupId>org.jacoco</groupId>
                         <artifactId>jacoco-maven-plugin</artifactId>
-                        <version>0.8.14</version>
+                        <version>${jacoco.version}</version>
                         <executions>
                             <execution>
                                 <id>prepare-agent</id>
