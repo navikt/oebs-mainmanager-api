@@ -2,6 +2,7 @@ package no.nav.oebs.api.common.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import lombok.AllArgsConstructor;
@@ -32,7 +33,8 @@ import lombok.ToString;
         "system"})
 public class ValiderKontoStrengRequest {
 
-        private Integer org_id;
+        @JsonProperty("org_id")
+        private Integer orgid;
         private String artskonto;
         private String ksted;
         private String produktoppgave;
@@ -41,8 +43,12 @@ public class ValiderKontoStrengRequest {
         private String statskonto;
         private String kilde;
         private String tilsagnsaar;
-        private String fritt_felt_1;
-        private String fritt_felt_2;
+
+        @JsonProperty("fritt_felt_1")
+        private String frittfelt1;
+
+        @JsonProperty("fritt_felt_2")
+        private String frittfelt2;
         private String fullmaktskode;
         private String regnskapsforer;
         private String system;

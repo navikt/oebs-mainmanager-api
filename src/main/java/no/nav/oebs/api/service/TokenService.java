@@ -1,5 +1,7 @@
 package no.nav.oebs.api.service;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -13,7 +15,9 @@ import tools.jackson.databind.json.JsonMapper;
 @Service
 public class TokenService {
 
-    public static String STATUS = "";
+    @Getter
+    @Setter
+    private String status = "";
 
     @Value("${mainmanager.user}")
     private String mainManagerUserName;
@@ -49,7 +53,7 @@ public class TokenService {
             JsonNode jsonNode = objectMapper.readTree(jsonText);
             String accessToken = jsonNode.get("access_token").asString();
 
-            STATUS = "OK";
+            this.status = "OK";
             return accessToken;
         }
         else {

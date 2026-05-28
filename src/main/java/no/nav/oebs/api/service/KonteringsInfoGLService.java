@@ -23,15 +23,15 @@ public class KonteringsInfoGLService extends ObjektMaps {
 		super(objectMapper);
 		this.plsqlProcedureRepository = plsqlProcedureRepository;
 	}
-	public String finnGLKonteringsInfoTransaksjoner(Integer org_id, String segmentname, String segmentverdi, LocalDate lastupdatedate ) {
+	public String finnGLKonteringsInfoTransaksjoner(Integer orgid, String segmentname, String segmentverdi, LocalDate lastupdatedate ) {
 
-		PlsqlProcedureResult result = executePlsqlProcedure(buildRequest(org_id, segmentname, segmentverdi, lastupdatedate));
+		PlsqlProcedureResult result = executePlsqlProcedure(buildRequest(orgid, segmentname, segmentverdi, lastupdatedate));
 		return result.getData();
 
 	}
-	private KontRequest buildRequest(Integer org_id, String segmentname, String segmentverdi, LocalDate lastupdatedate) {
+	private KontRequest buildRequest(Integer orgid, String segmentname, String segmentverdi, LocalDate lastupdatedate) {
 		return KontRequest.builder()
-				.org_id(org_id) //
+				.orgid(orgid) //
 				.segmentname(segmentname) //
 				.segmentverdi(segmentverdi) //
 				.lastupdatedate(lastupdatedate) //
