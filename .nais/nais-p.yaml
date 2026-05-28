@@ -23,6 +23,10 @@ spec:
      # cpu: 4000m
       memory: 512Mi
 
+  observability:
+    autoInstrumentation:
+      enabled: true
+      runtime: java
   azure:
     application:
       enabled: true

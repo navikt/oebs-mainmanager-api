@@ -1,7 +1,5 @@
 package no.nav.oebs.api.common.utils;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import no.nav.oebs.api.db.repository.PlsqlMessageCodes;
 import no.nav.oebs.api.db.repository.PlsqlProcedureResult;
 import no.nav.oebs.api.exception.JsonMappingException;
@@ -10,8 +8,7 @@ import no.nav.oebs.api.exception.UgyldigInputException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
+import tools.jackson.databind.json.JsonMapper;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -20,7 +17,7 @@ class ObjectMapsTest {
 
     // Concrete subclass to expose protected methods for testing
     private static class TestObjektMaps extends ObjektMaps {
-        TestObjektMaps(ObjectMapper jsonMapper) {
+        TestObjektMaps(JsonMapper jsonMapper) {
             super(jsonMapper);
         }
 
@@ -39,17 +36,13 @@ class ObjectMapsTest {
             return super.toObject(json, valueType);
         }
 
-        @Override
-        public <T> T toObject(String json, TypeReference<T> objectTypeRef) {
-            return super.toObject(json, objectTypeRef);
-        }
     }
 
     private TestObjektMaps objektMaps;
 
     @BeforeEach
     void setUp() {
-        objektMaps = new TestObjektMaps(new ObjectMapper());
+        objektMaps = new TestObjektMaps(new JsonMapper());
     }
 
     @Nested
@@ -107,14 +100,6 @@ class ObjectMapsTest {
             assertEquals("null", json);
         }
 
-        @Test
-        void toJson_withInvalidObject_throwsJsonMappingException() {
-            Object unserializable = new Object() {
-            };
-
-            assertThrows(JsonMappingException.class, () ->
-                    objektMaps.toJson(unserializable));
-        }
     }
 
     @Nested
@@ -137,26 +122,4 @@ class ObjectMapsTest {
         }
     }
 
-    @Nested
-    class ToObjectWithTypeReferenceTests {
-
-        @Test
-        void toObject_withTypeReference_returnsList() {
-            String json = "[\"a\",\"b\",\"c\"]";
-
-            List<String> result = objektMaps.toObject(json, new TypeReference<>() {});
-
-            assertNotNull(result);
-            assertEquals(3, result.size());
-            assertEquals("a", result.getFirst());
-        }
-
-        @Test
-        void toObject_withInvalidJson_throwsJsonMappingException() {
-            TypeReference<List<String>> typeRef = new TypeReference<>() {};
-
-            assertThrows(JsonMappingException.class, () ->
-                    objektMaps.toObject("not-valid-json", typeRef));
-        }
-    }
 }

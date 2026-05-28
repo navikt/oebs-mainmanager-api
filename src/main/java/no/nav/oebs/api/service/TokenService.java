@@ -1,13 +1,13 @@
 package no.nav.oebs.api.service;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.json.JsonMapper;
 
 
 @Service
@@ -27,7 +27,7 @@ public class TokenService {
     @Value("${mainmanager.url_token}")
     private String mainManagerUrlToken;
 
-    public String genererToken() throws Exception {
+    public String genererToken() {
 
         RestTemplate restTemplate = new RestTemplate();
 
@@ -45,9 +45,9 @@ public class TokenService {
 
         if (responseEntity.getStatusCode().equals(HttpStatus.OK)) {
             String jsonText = responseEntity.getBody();
-            ObjectMapper objectMapper = new ObjectMapper();
+            JsonMapper objectMapper = new JsonMapper();
             JsonNode jsonNode = objectMapper.readTree(jsonText);
-            String accessToken = jsonNode.get("access_token").asText();
+            String accessToken = jsonNode.get("access_token").asString();
 
             STATUS = "OK";
             return accessToken;
