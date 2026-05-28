@@ -1,4 +1,7 @@
 # oebs-mainmanager-api
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=navikt_oebs-mainmanager-api&metric=coverage)](https://sonarcloud.io/summary/new_code?id=navikt_oebs-mainmanager-api)  
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=navikt_oebs-mainmanager-api&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=navikt_oebs-mainmanager-api)  
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=navikt_oebs-mainmanager-api&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=navikt_oebs-mainmanager-api)
 
 REST API service that serves as an integration layer infront of Mainmanager used by OeBS. The service exposes post requested that pushes data to Mainamanger.
 Mainmanager is a system handling all properties NAV uses. OeBS is currently the only user of the service, however other systems may use in the future.
