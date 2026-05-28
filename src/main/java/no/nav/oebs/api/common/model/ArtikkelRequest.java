@@ -1,6 +1,7 @@
 package no.nav.oebs.api.common.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.*;
 
@@ -15,7 +16,8 @@ import java.time.LocalDate;
 @JsonPropertyOrder({ "org_id", "artikkelname", "artikkelnummer", "lastupdatedate" })
 public class ArtikkelRequest {
 
-    private Integer org_id;
+    @JsonProperty("org_id")
+    private Integer orgid;
 
     private String artikkelnavn;
 

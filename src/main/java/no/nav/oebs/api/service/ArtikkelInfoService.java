@@ -24,9 +24,9 @@ public class ArtikkelInfoService extends ObjektMaps {
         this.plsqlProcedureRepository = plsqlProcedureRepository;
     }
 
-    public String finnArtikkelTransaksjoner(Integer org_id,String artikkelnavn, String artikkelnummer, LocalDate lastupdatedate) {
+    public String finnArtikkelTransaksjoner(Integer orgid,String artikkelnavn, String artikkelnummer, LocalDate lastupdatedate) {
 
-        PlsqlProcedureResult result = executePlsqlProcedure(buildRequest(org_id, artikkelnavn, artikkelnummer, lastupdatedate));
+        PlsqlProcedureResult result = executePlsqlProcedure(buildRequest(orgid, artikkelnavn, artikkelnummer, lastupdatedate));
         if (result.getMessageNumber() < 0) {
             throwPlsqlException(result);
         }
@@ -34,9 +34,9 @@ public class ArtikkelInfoService extends ObjektMaps {
         return result.getData();
     }
 
-    private ArtikkelRequest buildRequest(Integer org_id, String artikkelnavn, String artikkelnummer, LocalDate lastupdatedate) {
+    private ArtikkelRequest buildRequest(Integer orgid, String artikkelnavn, String artikkelnummer, LocalDate lastupdatedate) {
         return ArtikkelRequest.builder()
-                .org_id(org_id) //
+                .orgid(orgid) //
                 .artikkelnavn(artikkelnavn) //
                 .artikkelnummer(artikkelnummer) //
                 .lastupdatedate(lastupdatedate) //

@@ -11,7 +11,6 @@ import no.nav.oebs.api.service.KonteringsInfoGLService;
 import no.nav.oebs.api.service.LeverandorInfoService;
 import no.nav.oebs.api.service.TokenService;
 import no.nav.oebs.api.service.ValiderKontoStrengService;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -248,21 +247,15 @@ class ServiceTest {
 
         @BeforeEach
         void setUp() {
-            service = new KonteringService();
+            service = new KonteringService(konteringsInfoGLService, tokenService);
             ReflectionTestUtils.setField(service, "konteringsInfoGLService", konteringsInfoGLService);
             ReflectionTestUtils.setField(service, "tokenService", tokenService);
-            TokenService.STATUS = "";
-        }
-
-        @AfterEach
-        void tearDown() {
-            TokenService.STATUS = "";
         }
 
         @Test
-        void konteringsInfo_whenTokenStatusIsNotOk_returnsNull() throws Exception {
+        void konteringsInfo_whenTokenStatusIsNotOk_returnsNull(){
             when(tokenService.genererToken()).thenReturn("token");
-            TokenService.STATUS = "FAIL";
+            when(tokenService.getStatus()).thenReturn("FAIL");
 
             String result = service.konteringsInfo(202, "KSTED", "1234", LocalDate.now(), "http://localhost");
 
@@ -270,9 +263,9 @@ class ServiceTest {
         }
 
         @Test
-        void konteringsInfo_whenDependencyThrows_returnsExceptionMessage() throws Exception {
+        void konteringsInfo_whenDependencyThrows_returnsExceptionMessage() {
             when(tokenService.genererToken()).thenReturn("token");
-            TokenService.STATUS = "OK";
+            when(tokenService.getStatus()).thenReturn("OK");
             when(konteringsInfoGLService.finnGLKonteringsInfoTransaksjoner(any(), any(), any(), any()))
                     .thenThrow(new RuntimeException("GL service failed"));
 

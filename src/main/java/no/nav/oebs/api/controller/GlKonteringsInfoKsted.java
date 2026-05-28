@@ -1,15 +1,11 @@
 package no.nav.oebs.api.controller;
 
-
-
-
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import no.nav.oebs.api.common.swagger.MainManagerSwagger;
 import no.nav.oebs.api.config.SwaggerConfig;
 import no.nav.oebs.api.service.KonteringService;
 import no.nav.security.token.support.core.api.Protected;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
@@ -28,21 +24,24 @@ public class GlKonteringsInfoKsted {
     @Value("${mainmanager.kostnadssted}")
     private String mainManagerKostnadssted;
 
-    @Autowired
     KonteringService konteringService;
+
+    public GlKonteringsInfoKsted(KonteringService konteringService) {
+        this.konteringService = konteringService;
+    }
 
     @Protected
     @PostMapping(path = "/gl_konteringsinfo_kostnadssted")
     @MainManagerSwagger
     public String glArtKontoTransaksjoner(
-            @RequestParam(name = "org id", defaultValue = "202") Integer org_id,
+            @RequestParam(name = "org id", defaultValue = "202") Integer orgid,
             @RequestParam(name = "segmentverdi", required = false)
             @Parameter(description = "f.eks. 010100") String segmentverdi,
             @RequestParam(name = "lastupdatedate", defaultValue = "")
             @Parameter(description = "f.eks. 2022-12-25")
-            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate lastupdatedate) throws Exception {
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate lastupdatedate) {
 
-        return konteringService.konteringsInfo(org_id, "OR_KSTED", segmentverdi, lastupdatedate, mainManagerKostnadssted);
+        return konteringService.konteringsInfo(orgid, "OR_KSTED", segmentverdi, lastupdatedate, mainManagerKostnadssted);
 
     }
 }

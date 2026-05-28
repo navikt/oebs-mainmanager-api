@@ -34,7 +34,7 @@ public class ValiderKontoStreng {
 	@GetMapping(path = "/validerkontostreng")
 	@MainManagerSwagger
 	public String finnValiderKontoStreng(
-			@RequestParam(name = "org_id", defaultValue = "202") Integer org_id, //
+			@RequestParam(name = "org_id", defaultValue = "202") Integer orgid, //
 			@RequestParam(name = "artskonto") @NotEmpty @Parameter(description = "eks. 669200000000") String artskonto,
 			@RequestParam(name = "ksted")  @NotEmpty @Parameter(description = "f.eks. 243299") String ksted,
 			@RequestParam(name = "produkt") @NotEmpty @Parameter(description = "f.eks. 000000") String produktoppgave,
@@ -43,14 +43,14 @@ public class ValiderKontoStreng {
 			@RequestParam(name = "statskonto") @NotEmpty @Parameter(description = "f.eks. 266175000000") String statskonto,
 			@RequestParam(name = "kilde") @NotEmpty @Parameter(description = "AP/AR") String kilde,
 			@RequestParam(name = "tilsagnsaar") @NotEmpty @Parameter(description = "f.eks. 000000") String tilsagnsaar,
-			@RequestParam(name = "fritt_felt_1") @NotEmpty @Parameter(description = "f.eks. 000000") String fritt_felt_1,
-			@RequestParam(name = "fritt_felt_2") @NotEmpty @Parameter(description = "f.eks. 000000") String fritt_felt_2,
+			@RequestParam(name = "fritt_felt_1") @NotEmpty @Parameter(description = "f.eks. 000000") String frittfelt1,
+			@RequestParam(name = "fritt_felt_2") @NotEmpty @Parameter(description = "f.eks. 000000") String frittfelt2,
 			@RequestParam(name = "fullmaktskode") @NotEmpty @Parameter(description = "f.eks. Z1") String fullmaktskode,
 			@RequestParam(name = "regnskapsforer") @NotEmpty @Parameter(description = "f.eks. 80") String regnskapsforer,
 			@RequestParam(name = "system", defaultValue = "MAINMANAGER") String system)
 
 			{
-					return validerKontoStrengService.finnValiderKontoStreng(org_id,
+					return validerKontoStrengService.finnValiderKontoStreng(orgid,
 							artskonto,
 							ksted,
 							produktoppgave,
@@ -59,8 +59,8 @@ public class ValiderKontoStreng {
 							statskonto,
 							kilde,
 							tilsagnsaar,
-							fritt_felt_1,
-							fritt_felt_2,
+							frittfelt1,
+							frittfelt2,
 							fullmaktskode,
 							regnskapsforer,
 							system);

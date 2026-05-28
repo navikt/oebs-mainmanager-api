@@ -7,7 +7,6 @@ import no.nav.oebs.api.common.swagger.MainManagerSwagger;
 import no.nav.oebs.api.config.SwaggerConfig;
 import no.nav.oebs.api.service.KonteringService;
 import no.nav.security.token.support.core.api.Protected;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
@@ -19,27 +18,30 @@ import java.time.LocalDate;
 @RestController
 @Validated
 @RequestMapping(path = "/api/v1", produces = MediaType.APPLICATION_JSON_VALUE + ";charset=UTF-8")
-@Tag(name = SwaggerConfig.MAINMANAGER) //, description = "MAINMANAGER API")
+@Tag(name = SwaggerConfig.MAINMANAGER)
 public class GlKonteringsInfoArtKonto {
 
     @Value("${mainmanager.art}")
     private String mainManagerArtskonto;
 
-    @Autowired
     KonteringService konteringService;
+
+    public GlKonteringsInfoArtKonto(KonteringService konteringService) {
+        this.konteringService = konteringService;
+    }
 
     @Protected
     @PostMapping(path = "/gl_konteringsinfo_artskonto")
     @MainManagerSwagger
     public String glArtKontoTransaksjoner(
-            @RequestParam(name = "org id", defaultValue = "202") Integer org_id,
+            @RequestParam(name = "org id", defaultValue = "202") Integer orgid,
             @RequestParam(name = "segmentverdi", required = false)
             @Parameter(description = "f.eks. 495000000000") String segmentverdi,
             @RequestParam(name = "lastupdatedate", defaultValue = "")
             @Parameter(description = "f.eks. 2022-12-25")
-            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate lastupdatedate) throws Exception {
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate lastupdatedate) {
 
-        return konteringService.konteringsInfo(org_id, "OR_ART", segmentverdi, lastupdatedate, mainManagerArtskonto);
+        return konteringService.konteringsInfo(orgid, "OR_ART", segmentverdi, lastupdatedate, mainManagerArtskonto);
 
     }
 }
