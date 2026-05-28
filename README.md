@@ -1,7 +1,11 @@
 # oebs-mainmanager-api
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=navikt_oebs-mainmanager-api&metric=coverage)](https://sonarcloud.io/summary/new_code?id=navikt_oebs-mainmanager-api)  
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=navikt_oebs-mainmanager-api&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=navikt_oebs-mainmanager-api)  
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=navikt_oebs-mainmanager-api&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=navikt_oebs-mainmanager-api)
 
-REST API service that integrates OEBS (Oracle E-Business Suite) with Mainmanager. Mainmanager is a system handling all properties NAV uses.
-The service exposes PL/SQL stored procedures from OEBS as REST endpoints, enabling querying and pushing data related to invoices, purchase orders, accounting entries, and supplier information.
+REST API service that serves as an integration layer infront of Mainmanager used by OeBS. The service exposes post requested that pushes data to Mainamanger.
+Mainmanager is a system handling all properties NAV uses. OeBS is currently the only user of the service, however other systems may use in the future.
+Additionally, the service also exposes validate account string endpoint, whitch is used by Mainmanager to validate account strings. 
 
 ---
 
@@ -9,8 +13,8 @@ The service exposes PL/SQL stored procedures from OEBS as REST endpoints, enabli
 ![Service-illustration](docs/service-illustration.png)
 
 The service acts as a middleware between the external systems Mainmanager and the OEBS Oracle database.
-Vieri receives data from OEBS via POST endpoints, requested by a script on the application server triggered daily by OeBS.
-#todo: Finne ut hvem som trigger kallene mot OeBS. 
+Mainmanager receives data from OEBS via POST endpoints, requested by a script on the application server triggered daily by OeBS.
+Additionally, Mainmanager uses the validate account string endpoint to validate account strings.
 
 ---
 
@@ -31,12 +35,12 @@ The package specification contains the methods called by the services in this re
 
 ## Dependencies
 
-| System                   | Purpose                                                            |
-|--------------------------|--------------------------------------------------------------------|
+| System                   | Purpose                                                     |
+|--------------------------|-------------------------------------------------------------|
 | **OEBS Oracle Database** | Source of all business data; accessed via PL/SQL stored procedures |
-| **Mainmanager REST API** | #todo: finne ut hva som gjør her                                   |
-| **NAV Token Validation** | OAuth2/JWT security via Azure AD                                   |
-| **NAIS platform**        | Container orchestration, secrets management, and deployment        |
+| **Mainmanager REST API** | Used to push data                                           |
+| **NAV Token Validation** | OAuth2/JWT security via Azure AD                            |
+| **NAIS platform**        | Container orchestration, secrets management, and deployment |
 
 ---
 
@@ -56,7 +60,7 @@ For more information, see the [oksty developer documentation](https://github.com
 
 [Swagger UI](http://localhost:8080/swagger-ui/index.html) is available when running locally,
 but all endpoints are protected by Entra ID by default. To test endpoints without authentication,
-replace the `@Protected` annotation in a controller with `@Unprotected`.
+replace the `@Protected` annotation in a controller with `@Unprotected`. 
 
 ---
 
