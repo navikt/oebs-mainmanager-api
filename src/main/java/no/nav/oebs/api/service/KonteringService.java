@@ -1,8 +1,8 @@
 package no.nav.oebs.api.service;
 
+import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -12,22 +12,20 @@ import java.util.Collections;
 import java.util.Objects;
 
 @Service
+@AllArgsConstructor
 public class KonteringService {
 
     private static final Logger logger = LoggerFactory.getLogger(KonteringService.class);
 
-    @Autowired
-    KonteringsInfoGLService konteringsInfoGLService;
+    private final KonteringsInfoGLService konteringsInfoGLService;
+    private final TokenService tokenService;
 
-    @Autowired
-    private TokenService tokenService;
-
-    public String konteringsInfo(Integer org_id, String segmentname, String segmentverdi, LocalDate lastupdatedate, String mainManagerUrl) throws Exception {
+    public String konteringsInfo(Integer orgid, String segmentname, String segmentverdi, LocalDate lastupdatedate, String mainManagerUrl) {
 
         String tokenet = tokenService.genererToken();
 
         try {
-            if (Objects.equals(TokenService.STATUS, "OK")) {
+            if (Objects.equals(tokenService.getStatus(), "OK")) {
 
                 RestTemplate restTemplate = new RestTemplate();
 
@@ -37,7 +35,7 @@ public class KonteringService {
                 headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
                 headers.setBearerAuth(tokenet);
 
-                String kont = konteringsInfoGLService.finnGLKonteringsInfoTransaksjoner(org_id, segmentname, segmentverdi, lastupdatedate);
+                String kont = konteringsInfoGLService.finnGLKonteringsInfoTransaksjoner(orgid, segmentname, segmentverdi, lastupdatedate);
 
                 HttpEntity<String> entity = new HttpEntity<>(kont, headers);
 

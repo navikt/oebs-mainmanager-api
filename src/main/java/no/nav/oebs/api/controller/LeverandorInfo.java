@@ -1,19 +1,15 @@
 package no.nav.oebs.api.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
-import no.nav.oebs.api.Application;
 import no.nav.oebs.api.common.swagger.MainManagerSwagger;
 import no.nav.oebs.api.service.LeverandorInfoService;
 import no.nav.oebs.api.service.TokenService;
 import io.swagger.v3.oas.annotations.Parameter;
 import no.nav.oebs.api.config.SwaggerConfig;
 import no.nav.security.token.support.core.api.Protected;
-import no.nav.security.token.support.core.api.Unprotected;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.*;
@@ -37,10 +33,9 @@ public class LeverandorInfo {
 	@Value("${mainmanager.vendors}")
 	private String mainManagerVendors;
 
-	@Autowired
 	private final TokenService tokenService;
-
 	private final LeverandorInfoService leverandorInfoService;
+
 	public LeverandorInfo(TokenService tokenService, LeverandorInfoService serviceLev) {
         this.tokenService = tokenService; //,
 		this.leverandorInfoService = serviceLev;
@@ -50,7 +45,7 @@ public class LeverandorInfo {
 	@PostMapping(path = "/leverandorinfo")
 	@MainManagerSwagger
 	public String finnLeverandortransaksjoner(
-			@RequestParam(name="org id", defaultValue = "202") Integer org_id,
+			@RequestParam(name="org id", defaultValue = "202") Integer orgid,
 			@RequestParam(name="leverandornavn", required = false)
 			@Parameter(description = "f.eks. BOUVET ASA") String leverandornavn,
 			@RequestParam(name = "leverandornummer", required = false)
@@ -59,11 +54,11 @@ public class LeverandorInfo {
 			@Parameter(description = "f.eks. NYDALEN") String leverandorsted,
 			@RequestParam(name = "lastupdatedate", defaultValue = "")
 			@Parameter(description = "f.eks. 2022-10-25")
-			@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate lastupdatedate) throws Exception {
+			@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate lastupdatedate) {
 
 		String tokenet = tokenService.genererToken();
 
-		if (Objects.equals(TokenService.STATUS, "OK")) {
+		if (Objects.equals(tokenService.getStatus(), "OK")) {
 
 			RestTemplate restTemplate = new RestTemplate();
 			HttpHeaders headers = new HttpHeaders();
@@ -72,7 +67,7 @@ public class LeverandorInfo {
 			headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
 			headers.setBearerAuth(tokenet);
 
-			String lev =  leverandorInfoService.finnLeverandorTransaksjoner(org_id, leverandornavn, leverandornummer, leverandorsted, lastupdatedate);
+			String lev =  leverandorInfoService.finnLeverandorTransaksjoner(orgid, leverandornavn, leverandornummer, leverandorsted, lastupdatedate);
 			HttpEntity<String> entity = new HttpEntity<>(lev, headers);
 			ResponseEntity<String> response = restTemplate.postForEntity(mainManagerVendors, entity, String.class);
 

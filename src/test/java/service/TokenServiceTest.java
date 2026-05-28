@@ -22,7 +22,7 @@ class TokenServiceTest {
     @BeforeEach
     void setUp() {
         tokenService = new TokenService();
-        TokenService.STATUS = "";
+        tokenService.setStatus("");
 
         ReflectionTestUtils.setField(tokenService, "mainManagerUserName", "testuser");
         ReflectionTestUtils.setField(tokenService, "mainManagerPassword", "testpass");
@@ -31,7 +31,7 @@ class TokenServiceTest {
 
     @AfterEach
     void tearDown() {
-        TokenService.STATUS = "";
+        tokenService.setStatus("");
     }
 
     @Test
@@ -43,7 +43,7 @@ class TokenServiceTest {
             String token = tokenService.genererToken();
 
             assertEquals("token-123", token);
-            assertEquals("OK", TokenService.STATUS);
+            assertEquals("OK", tokenService.getStatus());
         } finally {
             server.stop(0);
         }
@@ -60,7 +60,7 @@ class TokenServiceTest {
             String response = tokenService.genererToken();
 
             assertEquals("unauthorized", response);
-            assertEquals("", TokenService.STATUS);
+            assertEquals("", tokenService.getStatus());
         } finally {
             server.stop(0);
         }
@@ -73,7 +73,7 @@ class TokenServiceTest {
             ReflectionTestUtils.setField(tokenService, "mainManagerUrlToken", tokenUrl(server));
 
             assertThrows(Exception.class, () -> tokenService.genererToken());
-            assertEquals("", TokenService.STATUS);
+            assertEquals("", tokenService.getStatus());
         } finally {
             server.stop(0);
         }

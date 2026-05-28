@@ -6,7 +6,6 @@ import no.nav.oebs.api.common.swagger.MainManagerSwagger;
 import no.nav.oebs.api.config.SwaggerConfig;
 import no.nav.oebs.api.service.KonteringService;
 import no.nav.security.token.support.core.api.Protected;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
@@ -24,21 +23,24 @@ public class GlKonteringsInfoProdukt {
     @Value("${mainmanager.product}")
     private String mainManagerProdukt;
 
-    @Autowired
     KonteringService konteringService;
+
+    public GlKonteringsInfoProdukt(KonteringService konteringService) {
+        this.konteringService = konteringService;
+    }
 
     @Protected
     @PostMapping(path = "/gl_konteringsinfo_produkt")
     @MainManagerSwagger
     public String glArtKontoTransaksjoner(
-            @RequestParam(name = "org id", defaultValue = "202") Integer org_id,
+            @RequestParam(name = "org id", defaultValue = "202") Integer orgid,
             @RequestParam(name = "segmentverdi", required = false)
             @Parameter(description = "f.eks. EA0001") String segmentverdi,
             @RequestParam(name = "lastupdatedate", defaultValue = "")
             @Parameter(description = "f.eks. 2022-12-25")
-            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate lastupdatedate) throws Exception {
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate lastupdatedate) {
 
-        return konteringService.konteringsInfo(org_id, "OR_FORMAL", segmentverdi, lastupdatedate, mainManagerProdukt);
+        return konteringService.konteringsInfo(orgid, "OR_FORMAL", segmentverdi, lastupdatedate, mainManagerProdukt);
 
     }
 }

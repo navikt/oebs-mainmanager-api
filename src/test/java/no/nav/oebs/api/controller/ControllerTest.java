@@ -4,7 +4,6 @@ import com.sun.net.httpserver.HttpServer;
 import no.nav.oebs.api.service.ArtikkelInfoService;
 import no.nav.oebs.api.service.LeverandorInfoService;
 import no.nav.oebs.api.service.TokenService;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -29,11 +28,6 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class ControllerTest {
 
-    @AfterEach
-    void resetTokenStatus() {
-        TokenService.STATUS = "";
-    }
-
     @Nested
     class ArtikkelInfoControllerTests {
 
@@ -51,10 +45,10 @@ class ControllerTest {
         }
 
         @Test
-        void finnArtikkelInfoTransaksjoner_whenTokenStatusIsNotOk_returnsNull() throws Exception {
+        void finnArtikkelInfoTransaksjoner_whenTokenStatusIsNotOk_returnsNull() {
             LocalDate date = LocalDate.of(2026, 1, 1);
             when(tokenService.genererToken()).thenReturn("token");
-            TokenService.STATUS = "FAIL";
+            when(tokenService.getStatus()).thenReturn("FAIL");
 
             String result = controller.finnArtikkelInfoTransaksjoner(202, "artikkelnavn", "3170085", date);
 
@@ -64,7 +58,7 @@ class ControllerTest {
         }
 
         @Test
-        void finnArtikkelInfoTransaksjoner_whenTokenServiceThrows_propagatesException() throws Exception {
+        void finnArtikkelInfoTransaksjoner_whenTokenServiceThrows_propagatesException() {
             when(tokenService.genererToken()).thenThrow(new RuntimeException("Token error"));
 
             RuntimeException exception = assertThrows(RuntimeException.class,
@@ -80,7 +74,7 @@ class ControllerTest {
             try {
                 ReflectionTestUtils.setField(controller, "mainManagerArtikkelInfo", serverUrl(server, "/endpoint"));
                 when(tokenService.genererToken()).thenReturn("token");
-                TokenService.STATUS = "OK";
+                when(tokenService.getStatus()).thenReturn("OK");
                 when(artikkelInfoService.finnArtikkelTransaksjoner(202, "artikkelnavn", "3170085", date))
                         .thenReturn("{\"payload\":true}");
 
@@ -100,7 +94,7 @@ class ControllerTest {
             try {
                 ReflectionTestUtils.setField(controller, "mainManagerArtikkelInfo", serverUrl(server, "/endpoint"));
                 when(tokenService.genererToken()).thenReturn("token");
-                TokenService.STATUS = "OK";
+                when(tokenService.getStatus()).thenReturn("OK");
                 when(artikkelInfoService.finnArtikkelTransaksjoner(202, "artikkelnavn", "3170085", date))
                         .thenReturn("{\"payload\":true}");
 
@@ -131,10 +125,10 @@ class ControllerTest {
         }
 
         @Test
-        void finnLeverandortransaksjoner_whenTokenStatusIsNotOk_returnsNull() throws Exception {
+        void finnLeverandortransaksjoner_whenTokenStatusIsNotOk_returnsNull() {
             LocalDate date = LocalDate.of(2026, 2, 1);
             when(tokenService.genererToken()).thenReturn("token");
-            TokenService.STATUS = "FAIL";
+            when(tokenService.getStatus()).thenReturn("FAIL");
 
             String result = controller.finnLeverandortransaksjoner(202, "Navn AS", "12345", "Oslo", date);
 
@@ -144,7 +138,7 @@ class ControllerTest {
         }
 
         @Test
-        void finnLeverandortransaksjoner_whenTokenServiceThrows_propagatesException() throws Exception {
+        void finnLeverandortransaksjoner_whenTokenServiceThrows_propagatesException() {
             when(tokenService.genererToken()).thenThrow(new RuntimeException("Token error"));
 
             RuntimeException exception = assertThrows(RuntimeException.class,
@@ -160,7 +154,7 @@ class ControllerTest {
             try {
                 ReflectionTestUtils.setField(controller, "mainManagerVendors", serverUrl(server, "/endpoint"));
                 when(tokenService.genererToken()).thenReturn("token");
-                TokenService.STATUS = "OK";
+                when(tokenService.getStatus()).thenReturn("OK");
                 when(leverandorInfoService.finnLeverandorTransaksjoner(202, "Navn AS", "12345", "Oslo", date))
                         .thenReturn("{\"vendor\":true}");
 
@@ -180,7 +174,7 @@ class ControllerTest {
             try {
                 ReflectionTestUtils.setField(controller, "mainManagerVendors", serverUrl(server, "/endpoint"));
                 when(tokenService.genererToken()).thenReturn("token");
-                TokenService.STATUS = "OK";
+                when(tokenService.getStatus()).thenReturn("OK");
                 when(leverandorInfoService.finnLeverandorTransaksjoner(202, "Navn AS", "12345", "Oslo", date))
                         .thenReturn("{\"vendor\":true}");
 
