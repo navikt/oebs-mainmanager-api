@@ -24,12 +24,9 @@ Additionally, Mainmanager uses the validate account string endpoint to validate 
 The service currently runs with three instances: t1, q1 and prod. 
 
 ### OEBS PL/SQL procedures
-#todo: Oppdatere med riktige lenker og beskrivelse på hvordan den er integrert med OeBS
-
+OeBS calls a [shell script on the application server](https://github.com/navikt/oebs/blob/main/bin/XXRTVMAINMANAGERAPI.prog) every day,
+which in turn calls a PL/SQL procedure in OEBS. This procedure fetches data from OEBS that is posted to Mainmanager via REST calls to this service.
 Installation of the packages and log tables in OEBS used by this repository is handled by an [install script](https://github.com/navikt/oebs/blob/main/install/install_IFA_restapi_ve_v1.sh) in the OEBS repository.
-
-The [package specification](https://github.com/navikt/oebs/blob/main/admin/sql/xxrtv_oebs-restapi-ve-v1.pks) and [package body](https://github.com/navikt/oebs/blob/main/admin/sql/xxrtv_oebs-restapi-ve-v1.pkb) are also in the OEBS repository.
-The package specification contains the methods called by the services in this repository, and the package body contains their implementations.
 
 ---
 
