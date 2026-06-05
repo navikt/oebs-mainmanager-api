@@ -33,6 +33,11 @@ spec:
       tenant: trygdeetaten.no
   envFrom:
     - secret: main-manager
+    - secret: oebs-mainmanager-api-t1-oracle
+
+  env:
+    - name: SPRING_PROFILES_ACTIVE
+      value: t1
 
   accessPolicy:
     outbound:
@@ -42,29 +47,6 @@ spec:
         - ipv4: 10.52.64.43
           ports:
               - port: 1607
-
-        - ipv4: 10.53.104.46  # dmv43db01.adeo.no
-          ports:
-            - port: 1521
-        - ipv4: 10.53.104.48  # dmv43db02.adeo.no
-          ports:
-            - port: 1521
-        - ipv4: 10.53.104.47  # dm43db01-vip.adeo.no
-          ports:
-            - port: 1521
-        - ipv4: 10.53.104.49  # dmv43db02-vip.adeo.no
-          ports:
-            - port: 1521
-
-        - ipv4: 10.53.104.43  # dmv43-scan.adeo.no
-          ports:
-            - port: 1521
-        - ipv4: 10.53.104.44  # dmv43-scan.adeo.no
-          ports:
-            - port: 1521
-        - ipv4: 10.53.104.45  # dmv43-scan.adeo.no
-          ports:
-            - port: 1521
 
   prometheus:
     enabled: true
