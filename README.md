@@ -57,8 +57,7 @@ For more information, see the [oksty developer documentation](https://github.com
 
 [Swagger UI](http://localhost:8080/swagger-ui/index.html) is available when running locally,
 but all endpoints are protected by Entra ID by default. To test endpoints without authentication,
-replace the `@Protected` annotation in a controller with `@Unprotected`. 
-
+replace the `@Protected` annotation in a controller with `@Unprotected`.
 ---
 
 ## Testing
@@ -108,6 +107,7 @@ Swagger UI is available when the application is running:
 - [Swagger q1](https://oebs-mainmanager-api-q1.intern.dev.nav.no/swagger-ui/index.html)
 - [Swagger prod](https://oebs-mainmanager.intern.nav.no/swagger-ui/index.html)
 
+For Q1 and T1 you can use the [azure-token-generator](https://docs.nais.io/auth/entra-id/how-to/generate/) to generate a token that can be used to authenticate in Swagger UI.
 ### System documentation
 - [System documenation in Teams](https://navno.sharepoint.com/:u:/r/sites/VLTEAMOeBS200/Shared%20Documents/Systemdokumentasjon/MainManager/OeBS%20MD-050_070%20eyeshare,%20Vieri%20og%20Main%20Manager%20%E2%80%93%20Valider%20Kontostreng.docx.url?csf=1&web=1&e=IJQe2d)
   (Restricted access)

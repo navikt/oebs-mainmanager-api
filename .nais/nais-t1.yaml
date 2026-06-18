@@ -43,6 +43,11 @@ spec:
         - ipv4: 10.52.64.43
           ports:
               - port: 1607
+    inbound:
+      rules:
+        - application: azure-token-generator
+          namespace: nais
+          cluster: dev-gcp
 
   prometheus:
     enabled: true
