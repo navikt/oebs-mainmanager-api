@@ -34,10 +34,6 @@ spec:
     - secret: main-manager-q1
     - secret: oebs-mainmanager-api-q1-oracle
 
-  env:
-    - name: SPRING_PROFILES_ACTIVE
-      value: q1
-
   accessPolicy:
     outbound:
       external:

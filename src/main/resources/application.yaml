@@ -28,7 +28,7 @@ spring:
     driver-class-name: oracle.jdbc.OracleDriver
     username: ${APPS_USER}
     password: ${APPS_PASSWORD}
-    url: ${DB_URL}
+    url: ${ORACLE_URL}
   jpa:
     hibernate:
       ddl-auto: none
