@@ -15,7 +15,7 @@ import tools.jackson.databind.json.JsonMapper;
 @Service
 @Transactional(noRollbackFor = { Exception.class })
 public class ArtikkelInfoService extends ObjektMaps {
-    private static final String PLSQL_PROCEDURE = "xxrtv_mainmanager_api_pkg.xxrtv_artikkelinfo_api";
+    private static final String PLSQL_PROCEDURE = "apps.xxrtv_mainmanager_api_pkg.xxrtv_artikkelinfo_api";
 
     private final PlsqlProcedureRepository plsqlProcedureRepository;
 

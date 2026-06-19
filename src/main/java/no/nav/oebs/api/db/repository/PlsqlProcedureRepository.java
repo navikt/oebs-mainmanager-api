@@ -64,9 +64,9 @@ public class PlsqlProcedureRepository {
 	}
 
 	private void validateProcedureName(String procedureName) {
-		if (procedureName.split("\\.").length != 2) {
+		if (procedureName.split("\\.").length != 3) {
 			throw new IllegalArgumentException(
-					"Feil format på PL/SQL-prosedyrenavnet '" + procedureName + "'; skal ha format 'pakkenavn.prosedyrenavn'");
+					"Feil format på PL/SQL-prosedyrenavnet '" + procedureName + "'; skal ha format 'schema.pakkenavn.prosedyrenavn'");
 		}
 	}
 
@@ -76,6 +76,7 @@ public class PlsqlProcedureRepository {
 			String[] tokens = procedureName.split("\\.");
 
 			jdbcCall = new SimpleJdbcCall(jdbcTemplate) //
+					.withSchemaName(tokens[0])
 					.withCatalogName(tokens[0]) //
 					.withProcedureName(tokens[1]) //
 					.withoutProcedureColumnMetaDataAccess() //
