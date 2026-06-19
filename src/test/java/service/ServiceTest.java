@@ -98,7 +98,7 @@ class ServiceTest {
             service.finnArtikkelTransaksjoner(202, "Navn", "3170085", null);
 
             verify(plsqlProcedureRepository).executeInOutProcedure(
-                    eq("xxrtv_mainmanager_api_pkg.xxrtv_artikkelinfo_api"), any());
+                    eq("apps.xxrtv_mainmanager_api_pkg.xxrtv_artikkelinfo_api"), any());
         }
     }
 
@@ -135,7 +135,7 @@ class ServiceTest {
             service.finnGLKonteringsInfoTransaksjoner(202, "KSTED", "1234", null);
 
             verify(plsqlProcedureRepository).executeInOutProcedure(
-                    eq("xxrtv_mainmanager_api_pkg.xxrtv_gl_konteringsinfo_api"), any());
+                    eq("apps.xxrtv_mainmanager_api_pkg.xxrtv_gl_konteringsinfo_api"), any());
         }
     }
 
@@ -190,7 +190,7 @@ class ServiceTest {
             service.finnLeverandorTransaksjoner(202, "Navn AS", "12345", "Oslo", null);
 
             verify(plsqlProcedureRepository).executeInOutProcedure(
-                    eq("xxrtv_mainmanager_api_pkg.xxrtv_leverandoerinfo_api"), any());
+                    eq("apps.xxrtv_mainmanager_api_pkg.xxrtv_leverandoerinfo_api"), any());
         }
     }
 
@@ -230,7 +230,7 @@ class ServiceTest {
                     "STATS", "KILDE", "2024", "FF1", "FF2", "FULL", "REG", "SYS");
 
             verify(plsqlProcedureRepository).executeInOutProcedure(
-                    eq("xxrtv_mainmanager_api_pkg.xxrtv_validerkontostreng_api"), any());
+                    eq("apps.xxrtv_mainmanager_api_pkg.xxrtv_validerkontostreng_api"), any());
         }
     }
 
