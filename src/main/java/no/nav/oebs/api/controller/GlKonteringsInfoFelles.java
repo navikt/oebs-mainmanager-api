@@ -27,6 +27,8 @@ public class GlKonteringsInfoFelles {
 
     KonteringService konteringService;
 
+    public GlKonteringsInfoFelles(KonteringService konteringService) {this.konteringService = konteringService;}
+
     @Protected
     @PostMapping(path = "/gl_konteringsinfo_felles")
     @MainManagerSwagger
