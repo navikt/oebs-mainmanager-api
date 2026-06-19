@@ -77,8 +77,8 @@ public class PlsqlProcedureRepository {
 
 			jdbcCall = new SimpleJdbcCall(jdbcTemplate) //
 					.withSchemaName(tokens[0])
-					.withCatalogName(tokens[0]) //
-					.withProcedureName(tokens[1]) //
+					.withCatalogName(tokens[1]) //
+					.withProcedureName(tokens[2]) //
 					.withoutProcedureColumnMetaDataAccess() //
 					.declareParameters(declaredParameters);
 
