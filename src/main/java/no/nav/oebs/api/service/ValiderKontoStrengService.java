@@ -14,7 +14,7 @@ import tools.jackson.databind.json.JsonMapper;
 @Transactional(noRollbackFor = { Exception.class })
 public class ValiderKontoStrengService extends ObjektMaps {
 
-	private static final String PLSQL_PROCEDURE = "xxrtv_mainmanager_api_pkg.xxrtv_validerkontostreng_api";
+	private static final String PLSQL_PROCEDURE = "apps.xxrtv_mainmanager_api_pkg.xxrtv_validerkontostreng_api";
 
 	private final PlsqlProcedureRepository plsqlProcedureRepository;
 
