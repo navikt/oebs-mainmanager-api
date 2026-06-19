@@ -23,6 +23,12 @@ Additionally, Mainmanager uses the validate account string endpoint to validate 
 ### Instances and OEBS environments
 The service currently runs with three instances: t1, q1 and prod. 
 
+### Access OeBS
+The service runs in GCP and has gained access to OeBS through a solution called *oracleverk*,
+which allows specific services to reach OeBS from GCP. This explains the missing outbound configuration for OeBS in the 
+nais manifest. For more information on how to gain access to OeBS, see the 
+[oebs access documentation](https://navikt.github.io/oksty-documentation/docs/team-oebs/oebs-access).
+
 ### OEBS PL/SQL procedures
 OeBS calls a [shell script on the application server](https://github.com/navikt/oebs/blob/main/bin/XXRTVMAINMANAGERAPI.prog) every day,
 which in turn calls a PL/SQL procedure in OEBS. This procedure fetches data from OEBS that is posted to Mainmanager via REST calls to this service.
@@ -47,13 +53,13 @@ To run the service locally, use the `local` profile and set the following enviro
 Values for all secrets can be retrieved from the NAIS console for the application `oebs-mainmanager-api-t1`:
 
 - `APPS_USERNAME` – username for OEBS
-- `OAPPS_PASSWORD` – password for OEBS
-- `DB_URL` – URL for OEBS (change from t1 to u1 at the end)
+- `OAPPS_PASSWORD` – password for OEBS 
+- `ORACLE_URL` – URL for OEBS, find in https://confluence.adeo.no/spaces/ITO/pages/39159672/OeBS+Oversikt+over+milj%C3%B8er
 - `AZURE_DISCOVERY_URL` – discovery URL for the Azure AD app
 
 You must also have connectivity to oebsu1, which is located in the secure zone.
 You can either use **vdi-utvikler-oebs** (a VDI set up for development in the secure zone) or the **Global Secure Access Client**.
-For more information, see the [oksty developer documentation](https://github.com/navikt/oksty-documentation).
+For more information, see the [oebs access documentation](https://navikt.github.io/oksty-documentation/docs/team-oebs/oebs-access).
 
 [Swagger UI](http://localhost:8080/swagger-ui/index.html) is available when running locally,
 but all endpoints are protected by Entra ID by default. To test endpoints without authentication,
