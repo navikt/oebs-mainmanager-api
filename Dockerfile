@@ -1,4 +1,4 @@
-FROM europe-north1-docker.pkg.dev/cgr-nav/pull-through/nav.no/jre@sha256:5f0fa689f3f97213b6518090da231adbcdca89643a8836c96725cbfebbf06a3f
+FROM europe-north1-docker.pkg.dev/cgr-nav/pull-through/nav.no/jre@sha256:7f3049eafc632440b1dd3dd92a5daa4f86645c8baec3ef1366f94e91bc3f0a80
 ENV TZ="Europe/Oslo"
 COPY target/oebs-mainmanager-api-*.jar app.jar
 CMD ["-jar","app.jar"]
