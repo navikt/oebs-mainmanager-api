@@ -10,7 +10,7 @@ spec:
   image: {{ image }}
   port: 8080
 
-  ttl: 6m
+  #ttl: 6m
 
   replicas:
     min: 1
