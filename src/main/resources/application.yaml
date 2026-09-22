@@ -11,10 +11,7 @@ no.nav.security.jwt:
 # Add these if needed for SSL
 
 spring:
-  profiles:
-     active: nais
   datasource:
-
     hikari:
       data-source-properties:
         oracle:
@@ -26,8 +23,8 @@ spring:
       max-lifetime: 1800000
 
     driver-class-name: oracle.jdbc.OracleDriver
-    username: ${APPS_USER}
-    password: ${APPS_PASSWORD}
+    username: ${OEBS_DB_USERNAME}
+    password: ${OEBS_DB_PASSWORD}
     url: ${ORACLE_URL}
   jpa:
     hibernate:
@@ -40,7 +37,7 @@ spring:
     show-sql: false
     open-in-view: false
   application:
-    name: ${APP_NAME}
+    name: oebs-mainmanager-api
 
 mainmanager:
   user: ${MM_USER}
