@@ -1,0 +1,13 @@
+mainmanager:
+  user: user
+  password: password
+  grant_type: type1
+  url_token: https://mock-url.no
+  artikkelinfo: https://mock-url.no
+  art: https://mock-url.no
+  felles: https://mock-url.no
+  kostnadssted: https://mock-url.no
+  product: https://mock-url.no
+  statsregnskapskonto: https://mock-url.no
+  vendors: https://mock-url.no
+  oppgave: https://mock-url.no
