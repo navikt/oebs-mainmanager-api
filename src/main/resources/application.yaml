@@ -5,8 +5,8 @@ server:
 no.nav.security.jwt:
    issuer:
      azure:
-       accepted_audience: ${AZURE_ACCEPTED_AUDIENCE}
-       discovery-url: ${AZURE_DISCOVERY_URL}
+       accepted_audience: ${AZURE_APP_CLIENT_ID}
+       discovery-url: ${AZURE_APP_WELL_KNOWN_URL}
 
 # Add these if needed for SSL
 
@@ -54,9 +54,9 @@ mainmanager:
   oppgave: ${MM_OPPGAVE}
 
 swagger:
-  oebs_env: ${OEBS_ENV}
-  app_update: ${APP_UPDATE}
-  app_version: ${APP_VERSION}
+  oebs_env: oebs
+  app_update: 22.09.26
+  app_version: 1.0.0
 
 management:
   endpoints:
