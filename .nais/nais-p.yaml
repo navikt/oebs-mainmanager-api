@@ -21,7 +21,7 @@ spec:
       memory: 448Mi
     limits:
      # cpu: 4000m
-      memory: 512Mi
+      memory: 768Mi
 
   observability:
     autoInstrumentation:
