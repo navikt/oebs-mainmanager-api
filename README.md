@@ -74,7 +74,17 @@ Unit tests are set up using JUnit and Mockito. No integration tests are currentl
 
 ## Monitoring and Alerting
 
-No alerting is currently configured. Issues must be detected by users experiencing errors when calling the API, or through observed problems in OEBS that can be traced back to the API.
+Alerting is configured in NAIS with PrometheusRule + AlertmanagerConfig for both dev and prod:
+
+- Pod restarts
+- Error logs high
+- JVM heap pressure
+- Pending database connections
+- Instance down (no available replicas)
+- High 4xx rate
+- High 5xx rate
+
+Dev alerts route to `#team-oebs-alerts-dev`, prod alerts route to `#team-oebs-alerts`.
 
 Standard application monitoring is available via Grafana dashboards:
 - [Grafana dashboard for t1](https://grafana.nav.cloud.nais.io/a/nais-apm-app/services/team-oebs/oebs-mainmanager-api-t1?namespace=team-oebs&environment=dev-gcp)

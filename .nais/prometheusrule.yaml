@@ -1,0 +1,120 @@
+apiVersion: "monitoring.coreos.com/v1"
+kind: PrometheusRule
+metadata:
+  name: oebs-mainmanager-api
+  namespace: team-oebs
+  labels:
+    team: team-oebs
+spec:
+  groups:
+    - name: oebs-mainmanager-api
+      rules:
+        - alert: OebsMainmanagerApiJvmHeapPressure
+          expr: >
+            jvm_memory_used_bytes{area="heap", namespace="team-oebs", container="oebs-mainmanager-api"}
+            /
+            jvm_memory_max_bytes{area="heap", namespace="team-oebs", container="oebs-mainmanager-api"}
+            > 0.85
+          for: 5m
+          annotations:
+            summary: "JVM heap usage is above 85% ({{ $value | humanizePercentage }})"
+            consequence: "Risk of OutOfMemoryError and pod crash"
+            action: "Check memory usage and consider increasing memory limits"
+            documentation: "https://prometheus.io/docs/prometheus/latest/querying/basics/"
+            sla: "Respond within 1 hour during business hours"
+          labels:
+            severity: warning
+            alert_routing_slack: team-oebs-alerts
+            alert_type: custom
+
+        - alert: OebsMainmanagerApiDatabaseConnectionsPending
+          expr: hikaricp_connections_pending{namespace="team-oebs", container="oebs-mainmanager-api"} > 0
+          for: 2m
+          annotations:
+            summary: "Database connections are queued ({{ $value }} pending)"
+            consequence: "Requests may fail or time out while waiting for database connections"
+            action: "Check that Oracle is available and that HikariCP pool settings are sane"
+            documentation: "https://prometheus.io/docs/prometheus/latest/querying/basics/"
+            sla: "Respond within 15 minutes"
+          labels:
+            severity: warning
+            alert_routing_slack: team-oebs-alerts
+            alert_type: custom
+
+        - alert: OebsMainmanagerApiPodRestarts
+          expr: increase(kube_pod_container_status_restarts_total{namespace="team-oebs", container="oebs-mainmanager-api"}[1h]) > 2
+          for: 0m
+          annotations:
+            summary: "Pod has restarted {{ $value }} times in the last hour"
+            consequence: "Unstable application behavior and potential temporary downtime"
+            action: "Check pod logs and recent deploys for crash causes"
+            documentation: "https://prometheus.io/docs/prometheus/latest/querying/basics/"
+            sla: "Respond within 30 minutes during business hours"
+          labels:
+            severity: warning
+            alert_routing_slack: team-oebs-alerts
+            alert_type: custom
+
+        - alert: OebsMainmanagerApiErrorLogsHigh
+          expr: increase(logback_events_total{level="error", namespace="team-oebs", container="oebs-mainmanager-api"}[5m]) > 3
+          for: 2m
+          annotations:
+            summary: "High rate of ERROR log messages ({{ $value }} in last 5 min)"
+            consequence: "Errors are likely impacting requests or downstream integrations"
+            action: "Inspect application logs and traces for failing request paths"
+            documentation: "https://prometheus.io/docs/prometheus/latest/querying/basics/"
+            sla: "Respond within 1 hour during business hours"
+          labels:
+            severity: warning
+            alert_routing_slack: team-oebs-alerts
+            alert_type: custom
+
+        - alert: OebsMainmanagerApiInstanceDown
+          expr: kube_deployment_status_replicas_available{namespace="team-oebs", deployment="oebs-mainmanager-api"} == 0
+          for: 10m
+          annotations:
+            summary: "oebs-mainmanager-api has no available replicas"
+            consequence: "oebs-mainmanager-api is not available"
+            action: "Check deploy status and pods with kubectl describe deploy/pod and kubectl logs"
+          labels:
+            severity: warning
+            alert_routing_slack: team-oebs-alerts
+            alert_type: custom
+
+        - alert: OebsMainmanagerApiHigh4xxRate
+          expr: |
+            (
+              sum(rate(http_server_requests_seconds_count{namespace="team-oebs", app="oebs-mainmanager-api", uri=~"/api/v1/.*", status=~"4.."}[5m]))
+              /
+              clamp_min(sum(rate(http_server_requests_seconds_count{namespace="team-oebs", app="oebs-mainmanager-api", uri=~"/api/v1/.*"}[5m])), 0.1)
+            ) > 0.25
+            and
+            sum(rate(http_server_requests_seconds_count{namespace="team-oebs", app="oebs-mainmanager-api", uri=~"/api/v1/.*"}[5m])) > 0.2
+          for: 10m
+          annotations:
+            summary: "oebs-mainmanager-api has a high 4xx rate"
+            consequence: "Client requests may fail due to auth or contract mismatch regressions"
+            action: "Verify token validation, caller setup and API contract changes"
+          labels:
+            severity: warning
+            alert_routing_slack: team-oebs-alerts
+            alert_type: custom
+
+        - alert: OebsMainmanagerApiHighErrorRate
+          expr: |
+            (
+              sum(rate(http_server_requests_seconds_count{namespace="team-oebs", app="oebs-mainmanager-api", status=~"5.."}[5m]))
+              /
+              clamp_min(sum(rate(http_server_requests_seconds_count{namespace="team-oebs", app="oebs-mainmanager-api"}[5m])), 0.1)
+            ) > 0.05
+            and
+            sum(rate(http_server_requests_seconds_count{namespace="team-oebs", app="oebs-mainmanager-api"}[5m])) > 0.5
+          for: 10m
+          annotations:
+            summary: "oebs-mainmanager-api has a high 5xx rate"
+            consequence: "Callers receive server errors from the API"
+            action: "Check logs and traces for failing downstream calls and unhandled exceptions"
+          labels:
+            severity: warning
+            alert_routing_slack: team-oebs-alerts
+            alert_type: custom
