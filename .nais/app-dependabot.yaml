@@ -33,6 +33,10 @@ spec:
     - secret: dependabot-oebs-t1
     - secret: mainmanager-api-dependabot-oracle
 
+  env:
+    - name: SPRING_PROFILES_ACTIVE
+      value: dependabot
+
   accessPolicy:
     inbound:
       rules: [ ]
