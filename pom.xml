@@ -8,7 +8,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>4.0.6</version>
+        <version>4.1.1</version>
         <relativePath/>
     </parent>
 
@@ -31,8 +31,8 @@
 
         <token-validation.version>5.0.30</token-validation.version>
         <logstash-logback-encoder.version>9.0</logstash-logback-encoder.version>
-        <springdoc-openapi.version>3.0.3</springdoc-openapi.version>
-        <lombok-version>1.18.46</lombok-version>
+        <springdoc-openapi.version>3.1.1</springdoc-openapi.version>
+        <lombok-version>1.18.48</lombok-version>
         <jacoco.version>0.8.15</jacoco.version>
         <jakarta-validation.version>3.1.1</jakarta-validation.version>
 
