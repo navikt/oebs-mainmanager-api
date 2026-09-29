@@ -43,7 +43,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - name: Deploy alerts to dev-gcp
-        uses: nais/deploy/actions/deploy@a7f8690f9b367fcbf5348a0a1e21d44f1aae50eb
+        uses: nais/deploy/actions/deploy@1de80da70ad26556ecdc5964a8b7ec3bbed98120
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: dev-gcp
@@ -60,7 +60,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - name: Deploy alerts to prod-gcp
-        uses: nais/deploy/actions/deploy@a7f8690f9b367fcbf5348a0a1e21d44f1aae50eb
+        uses: nais/deploy/actions/deploy@1de80da70ad26556ecdc5964a8b7ec3bbed98120
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: prod-gcp
